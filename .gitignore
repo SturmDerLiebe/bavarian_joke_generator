@@ -1,3 +1,7 @@
+# Custom gitignore part:
+public
+
+# gitignnore by vite:
 # Logs
 logs
 *.log
