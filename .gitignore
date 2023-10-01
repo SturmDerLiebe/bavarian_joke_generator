@@ -1,7 +1,13 @@
 # Custom gitignore part:
 public
 
+# playwright
+
 # gitignnore by vite:
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
 # Logs
 logs
 *.log
@@ -26,6 +32,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-/test-results/
-/playwright-report/
-/playwright/.cache/
