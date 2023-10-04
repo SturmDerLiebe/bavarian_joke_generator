@@ -19,7 +19,7 @@ describe("db_read_joke", function() {
 
       // THEN it should return an array of two joke data objects: 
       const DUMMY_DATA1 = {
-        id: expect.any(BigInt),
+        id: expect.any(String),
         text: DUMMY_JOKE,
         explanation: DUMMY_EXPLANATION,
         submitted_by: null
