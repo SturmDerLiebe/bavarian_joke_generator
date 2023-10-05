@@ -1,0 +1,14 @@
+services:
+  joke_database:
+    image: mysql:latest
+    volumes:
+      - "../database/mysql:/docker-entrypoint-initdb.d"
+      # Add the following line for production:
+      # - db_data:/var/lib/mysql
+    ports:
+      - "4000:3306" # Change to expose: 3306 in production
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+#volumes:
+#db-data:
