@@ -6,7 +6,7 @@
   * @enum {string}
   */
 const ROLES = {
-  /** User with READ privileges only */
+  /** User with SELEECT privileges only */
   reader: "reader"
 };
 
@@ -14,5 +14,5 @@ const ROLES = {
   * The main database
   * @readonly
   */
-const DATABASE_NAME = "Bavarian_Jokes";
+const DATABASE_NAME = "bavarian_jokes";
 export { ROLES, DATABASE_NAME };
