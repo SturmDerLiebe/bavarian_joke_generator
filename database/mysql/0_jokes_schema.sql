@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS user (
     id SERIAL,
     username VARCHAR(30) NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE KEY (name)
+    UNIQUE KEY (username)
 );
 
 CREATE TABLE
