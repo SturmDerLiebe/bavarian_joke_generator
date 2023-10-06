@@ -3,13 +3,13 @@
 import { expect, test, describe } from "@jest/globals";
 import db_read_joke from "./read_joke_db.js";
 
+const KEYWORD = "Dummy";
 describe("db_read_joke", function() {
   test(", given an existing keyword, returns all jokes' data in an array",
     async function() {
       // GIVEN the keyword exists in the db and has two jokes associated with it:
       const DUMMY_JOKE = "Lorem Ipsum"
       const DUMMY_EXPLANATION = "This explains everything"
-      const KEYWORD = "Dummy";
       const USER = "Mark";
       await write_joke_db(DUMMY_JOKE, DUMMY_EXPLANATION, KEYWORD);
       await write_joke_db(DUMMY_JOKE, DUMMY_EXPLANATION, KEYWORD, USER);
