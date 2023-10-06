@@ -7,7 +7,7 @@
   */
 const ROLES = {
   /** User with READ privileges only */
-  reader: "Reader"
+  reader: "reader"
 };
 
 /**
