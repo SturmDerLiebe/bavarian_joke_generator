@@ -1,6 +1,7 @@
 "use strict"
 
 import { expect, test, describe } from "@jest/globals";
+// Internal:
 import db_read_joke from "./read_joke_db.js";
 
 const KEYWORD = "Dummy";
