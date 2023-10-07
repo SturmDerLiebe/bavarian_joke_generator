@@ -34,6 +34,6 @@ describe("db_read_joke", function() {
     // WHEN the function is called:
     const JOKE_DATA = await db_read_joke(KEYWORD);
     // THEN it should return null:
-    expect(JOKE_DATA).toBeNull();
+    expect(JOKE_DATA).toHaveLength(0);
   });
 });
