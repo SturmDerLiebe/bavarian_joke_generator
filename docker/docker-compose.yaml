@@ -9,6 +9,11 @@ services:
       - "4000:3306" # Change to expose: 3306 in production
     environment:
       MYSQL_ROOT_PASSWORD: example
+    command:
+      - --host-cache-size=3
 
+# Uncomment in production:
+#networks:
+#  sql:
 #volumes:
-#db-data:
+#  db-data:
