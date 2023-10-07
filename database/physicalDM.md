@@ -15,14 +15,14 @@
 entity joke {
     * id: SERIAL <<PK>>
     --
-    * text: TEXT
+    * content: TEXT
     * explanation: TEXT
-    submitted_by: BIGINT UNSIGNED NOT NULL <<FK>>
+    submitted_by: BIGINT UNSIGNED <<FK>>
 }
 
 entity jk_pair {
-    * joke_id: BIGINT UNSIGNED NOT NULL <<PK>> <<FK>>
-    * keyword_id: BIGINT UNSIGNED NOT NULL <<PK>> <<FK>>
+    * joke_id: BIGINT UNSIGNED <<PK>> <<FK>>
+    * keyword_id: BIGINT UNSIGNED <<PK>> <<FK>>
     --
 }
 
@@ -44,16 +44,16 @@ entity authenticator {
     --
     * credentialID: TEXT
     * credentialPublicKey: BLOB
-    * counter: BIGINT UNSIGNED NOT NULL
+    * counter: BIGINT UNSIGNED
     * credentialDeviceType: ENUM('singleDevice', 'multiDevice')
     * credentialBackedUp: BOOL
     transports: SET('ble', 'cable', 'hybrid', 'internal', 'nfc', 'smart-card', 'usb')
-    * user_id: BIGINT UNSIGNED NOT NULL <<FK>>
+    * user_id: BIGINT UNSIGNED <<FK>>
 }
 
 joke }|--|{ jk_pair : has >
 jk_pair }|--|{ Keyword : is associated with <
-joke }|--o{ user : submits <
+joke }|--o| user : submits <
 user ||--|{ authenticator : logs in with >
 
 note left of jk_pair: Jokes can only be inserted\nwith at least one keyword
