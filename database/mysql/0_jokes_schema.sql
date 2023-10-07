@@ -31,6 +31,7 @@ IF NOT EXISTS authenticator (
 CREATE TABLE
 IF NOT EXISTS joke (
     id SERIAL,
+    content TEXT NOT NULL,
     explanation TEXT NOT NULL,
     submitted_by BIGINT UNSIGNED,
     PRIMARY KEY (id),
