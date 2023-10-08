@@ -10,7 +10,7 @@ const USER = USERS.reader;
 /**
   * A joke entity.
   * @typedef {Object} Joke
-  * @property {bigint} id - The identifier of this joke.
+  * @property {string} id - The identifier of this joke. MySQL should return this as a string not BigInt
   * @property {string} text - The content of this joke.
   * @property {string} explanation - The explanation if this joke.
   */
