@@ -1,4 +1,4 @@
-extends ../layouts/index.pug
+extends layout.pug
 
 block style
     link(rel="stylesheet" href="styles/keyword/style.css")
@@ -13,4 +13,4 @@ block main
 mixin joke_card(id, content, username)
     figure(id=id)
         p= content
-        figcaption= submitted by #{user}
+        figcaption submitted by #{user}
