@@ -32,12 +32,14 @@ async function db_read_joke(keyword) {
     bigNumberStrings: true
   });
   try {
+    // The following SQL first joins the joke wih the keyword table and then joins with the user table wherever the user id matches
     const [RESULT] = await CONNECTION.execute(`
-      SELECT joke.id, joke.content, joke.explanation, joke.submitted_by
-      FROM joke
-      INNER JOIN jk_pair ON joke.id = jk_pair.joke_id
-      INNER JOIN keyword ON jk_pair.keyword_id = keyword.id
-      WHERE keyword.title = ?;
+      SELECT j.id, j.content, j.explanation, u.username AS submitted_by
+      FROM joke AS j
+      INNER JOIN jk_pair AS jkp ON j.id = jkp.joke_id
+      INNER JOIN keyword AS k ON jkp.keyword_id = k.id
+      LEFT JOIN user as u ON j.submitted_by = u.id
+      WHERE k.title = ?;
 `,
       [keyword]
     );
