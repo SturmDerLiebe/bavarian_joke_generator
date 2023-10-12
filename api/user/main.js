@@ -1,8 +1,16 @@
 "use strict"
 
 import express from "express";
+import db_read_joke from "../../helpers/database/read_joke_db";
 
 const APP = express();
+
+APP.set('view engine', 'pug')
+APP.get('/:keyword', async function(req, res) {
+  const KEYWORD = req.params.keyword;
+  const JOKE_DATA = db_read_joke(KEYWORD);
+  res.render('keyword', { KEYWORD, JOKE_DATA })
+})
 
 APP.get("api/read_joke/:keyword", function(req, res) {
   const KEYWORD = req.params.keyword
