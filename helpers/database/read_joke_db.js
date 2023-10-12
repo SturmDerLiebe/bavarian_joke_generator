@@ -18,7 +18,7 @@ const USER = USERS.reader;
 /**
   * Reads all jokes from the databes matching the given {@link keyword}.
   * @param {string} keyword the keyword associated with a joke.
-  * @returns {(Joke[])} Object containing the joke data or null if nothing was found.
+  * @returns {Promise<Joke[]>} Object containing the joke data or null if nothing was found.
   * @throws {Error} If any connection error or similar happens.
   */
 async function db_read_joke(keyword) {
