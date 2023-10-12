@@ -4,10 +4,10 @@ block style
     link(rel="stylesheet" href="styles/keyword/style.css")
 
 block main
-    h1= joke_data.keyword
-    each joke, index in joke_data
+    h1= KEYWORD
+    each joke, index in JOKE_DATA
         +joke_card(joke.id, joke.content, joke.submitted_by)
-        unless (index === joke_data.length-1)
+        unless (index === JOKE_DATA.length-1)
             hr
 
 mixin joke_card(id, content, username)
