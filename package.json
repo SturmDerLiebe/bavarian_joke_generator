@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "playwright test",
-    "jest": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=environment/.env.test jest --setupFiles=dotenv/config --detectOpenHandles"
+    "jest": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=environment/.env.test jest --setupFiles=dotenv/config --detectOpenHandles",
+    "format": "prettier . --write"
   },
   "devDependencies": {
     "@playwright/test": "^1.38.0",
