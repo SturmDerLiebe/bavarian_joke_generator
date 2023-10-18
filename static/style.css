@@ -1,96 +1,108 @@
 /* Set up fonts: */
 @font-face {
-    font-family: Atkinson;
-    src:
-        local("Atkinson-Hyperlegible Regular"),
-        local("Atkinson Hyperlegible-Regular"),
-        url("../public/fonts/WOFF2/Atkinson-Hyperlegible-Regular-102a.woff2") format("woff2"),
-        url("../public/fonts/WOFF/Atkinson-Hyperlegible-Regular-102.woff") format("woff"),
-        url("../public/fonts/TTF/Atkinson-Hyperlegible-Regular-102.ttf") format("truetype")
+  font-family: Atkinson;
+  src:
+    local("Atkinson-Hyperlegible Regular"),
+    local("Atkinson Hyperlegible-Regular"),
+    url("../public/fonts/WOFF2/Atkinson-Hyperlegible-Regular-102a.woff2")
+      format("woff2"),
+    url("../public/fonts/WOFF/Atkinson-Hyperlegible-Regular-102.woff")
+      format("woff"),
+    url("../public/fonts/TTF/Atkinson-Hyperlegible-Regular-102.ttf")
+      format("truetype");
 }
 
 @font-face {
-    font-family: Atkinson;
-    src:
-        local("Atkinson-Hyperlegible Bold"),
-        local("Atkinson Hyperlegible-Bold"),
-        url("../public/fonts/WOFF2/Atkinson-Hyperlegible-Bold-102a.woff2") format("woff2"),
-        url("../public/fonts/WOFF/Atkinson-Hyperlegible-Bold-102.woff") format("woff"),
-        url("../public/fonts/TTF/Atkinson-Hyperlegible-Bold-102.ttf") format("truetype");
-   font-weight: bold; 
+  font-family: Atkinson;
+  src:
+    local("Atkinson-Hyperlegible Bold"),
+    local("Atkinson Hyperlegible-Bold"),
+    url("../public/fonts/WOFF2/Atkinson-Hyperlegible-Bold-102a.woff2")
+      format("woff2"),
+    url("../public/fonts/WOFF/Atkinson-Hyperlegible-Bold-102.woff")
+      format("woff"),
+    url("../public/fonts/TTF/Atkinson-Hyperlegible-Bold-102.ttf")
+      format("truetype");
+  font-weight: bold;
 }
 
 @font-face {
-    font-family: Atkinson;
-    src:
-        local("Atkinson-Hyperlegible Italic"),
-        local("Atkinson Hyperlegible-Italic"),
-        url("../public/fonts/WOFF2/Atkinson-Hyperlegible-Italic-102a.woff2") format("woff2"),
-        url("../public/fonts/WOFF/Atkinson-Hyperlegible-Italic-102.woff") format("woff"),
-        url("../public/fonts/TTF/Atkinson-Hyperlegible-Italic-102.ttf") format("truetype");
-   font-style: italic; 
+  font-family: Atkinson;
+  src:
+    local("Atkinson-Hyperlegible Italic"),
+    local("Atkinson Hyperlegible-Italic"),
+    url("../public/fonts/WOFF2/Atkinson-Hyperlegible-Italic-102a.woff2")
+      format("woff2"),
+    url("../public/fonts/WOFF/Atkinson-Hyperlegible-Italic-102.woff")
+      format("woff"),
+    url("../public/fonts/TTF/Atkinson-Hyperlegible-Italic-102.ttf")
+      format("truetype");
+  font-style: italic;
 }
 
 @font-face {
-    font-family: Atkinson;
-    src:
-        local("Atkinson-Hyperlegible BoldItalic"),
-        local("Atkinson Hyperlegible-BoldItalic"),
-        url("../public/fonts/WOFF2/Atkinson-Hyperlegible-BoldItalic-102a.woff2") format("woff2"),
-        url("../public/fonts/WOFF/Atkinson-Hyperlegible-BoldItalic-102.woff") format("woff"),
-        url("../public/fonts/TTF/Atkinson-Hyperlegible-BoldItalic-102.ttf") format("truetype");
-    font-weight: bold;
-    font-style: italic; 
+  font-family: Atkinson;
+  src:
+    local("Atkinson-Hyperlegible BoldItalic"),
+    local("Atkinson Hyperlegible-BoldItalic"),
+    url("../public/fonts/WOFF2/Atkinson-Hyperlegible-BoldItalic-102a.woff2")
+      format("woff2"),
+    url("../public/fonts/WOFF/Atkinson-Hyperlegible-BoldItalic-102.woff")
+      format("woff"),
+    url("../public/fonts/TTF/Atkinson-Hyperlegible-BoldItalic-102.ttf")
+      format("truetype");
+  font-weight: bold;
+  font-style: italic;
 }
 
 /* CSS Presets: */
 *,
 *::before,
-*::after { 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: inherit;
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
 body {
-    height: 100%;
-    min-height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 }
 
 /* Real CSS start: */
 html::before {
-    content: "";
-    background: url("../../public/bavarian_flag_repeatable.svg"); 
-    z-index: -1;
-    position: absolute;
-    rotate: -45deg;
-    /* Move the rotated image back to the upper left corner: */
-    top: -100%;
-    left: -100%;
-    /* Stretch the image to cover the whole page */
-    width: 300%;
-    height: 300%;
-    /* Set background color to cover browser induced gaps between repeats */
-    background-color: rgb(9, 142, 202);
+  content: "";
+  background: url("../../public/bavarian_flag_repeatable.svg");
+  z-index: -1;
+  position: absolute;
+  rotate: -45deg;
+  /* Move the rotated image back to the upper left corner: */
+  top: -100%;
+  left: -100%;
+  /* Stretch the image to cover the whole page */
+  width: 300%;
+  height: 300%;
+  /* Set background color to cover browser induced gaps between repeats */
+  background-color: rgb(9, 142, 202);
 }
 
 html {
-    height: 100%;
-    overflow: hidden;
-    font-family: Atkinson, sans-serif;
+  height: 100%;
+  overflow: hidden;
+  font-family: Atkinson, sans-serif;
 }
 
 body {
-    /* Watch out: paddinngs are based on parent width */
-    padding: 12.5% 0;
+  /* Watch out: paddinngs are based on parent width */
+  padding: 12.5% 0;
 }
 
 main {
-    width: 50%;
-    height: 100%;
-    margin: 0 auto;
-    background-color: rgb(240, 255, 255, 0.7);
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: rgb(240, 255, 255, 0.7);
 }
 
 [name="Joke generator"] {

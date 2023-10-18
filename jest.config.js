@@ -1,10 +1,10 @@
 const config = {
-    projects: [
-        {
-            displayName: 'database',
-            testMatch: ['**/database/*.test.js'],
-        },
-    ],
+  projects: [
+    {
+      displayName: "database",
+      testMatch: ["**/database/*.test.js"],
+    },
+  ],
 };
 
 export default config;

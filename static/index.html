@@ -1,37 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bavarian Jokes Generator</title>
-        <link rel="stylesheet" href="styles/global.css" />
-    </head>
-    <body>
-        <main>
-            <h1>Griasd eich zum Bavarian Joke Generator</h1>
-            <form action="" method="" >
-                <label for="keyword">What should the joke be about?</label>
-                <br>
-                <input 
-                    id="keyword" 
-                    name="keyword" 
-                    type="search" 
-                    placeholder="e.g. Dog" 
-                    pattern="[A-z]+" 
-                    minlength="2" 
-                    aria-describedby="input_hint"
-                    required>
-                <span id="input_hint" >Only use English letters!</span>
-                <br>
-                <button type="submit">Generate Joke</button>
-                <label for="joke_output">Your jokes:</label>
-                <br>
-                <output 
-                    id="joke_output" 
-                    for="keyword" >
-                        Not yet generated
-                </output>
-            </form>
-        </main> 
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bavarian Jokes Generator</title>
+    <link rel="stylesheet" href="styles/global.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Griasd eich zum Bavarian Joke Generator</h1>
+      <form action="" method="">
+        <label for="keyword">What should the joke be about?</label>
+        <br />
+        <input
+          id="keyword"
+          name="keyword"
+          type="search"
+          placeholder="e.g. Dog"
+          pattern="[A-z]+"
+          minlength="2"
+          aria-describedby="input_hint"
+          required
+        />
+        <span id="input_hint">Only use English letters!</span>
+        <br />
+        <button type="submit">Generate Joke</button>
+        <label for="joke_output">Your jokes:</label>
+        <br />
+        <output id="joke_output" for="keyword"> Not yet generated </output>
+      </form>
+    </main>
+  </body>
 </html>

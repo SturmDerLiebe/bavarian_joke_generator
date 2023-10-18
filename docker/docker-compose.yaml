@@ -11,7 +11,6 @@ services:
       MYSQL_ROOT_PASSWORD: example
     command:
       - --host-cache-size=3
-
 # Uncomment in production:
 #networks:
 #  sql:
