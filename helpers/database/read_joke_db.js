@@ -32,7 +32,7 @@ async function db_read_joke(keyword) {
   });
   try {
     // The following SQL first joins the joke wih the keyword table and then joins with the user table wherever the user id matches
-    const [RESULT] = await CONNECTION.execute(
+    const [ROWS] = await CONNECTION.execute(
       `
       SELECT j.id, j.content, j.explanation, u.username AS submitted_by
       FROM joke AS j
@@ -43,7 +43,7 @@ async function db_read_joke(keyword) {
 `,
       [keyword],
     );
-    return RESULT;
+    return ROWS;
   } finally {
     await CONNECTION.end();
   }
