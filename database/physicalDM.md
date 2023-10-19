@@ -22,17 +22,17 @@ entity joke {
 
 entity jk_pair {
     * joke_id: BIGINT UNSIGNED <<PK>> <<FK>>
-    * keyword_id: BIGINT UNSIGNED <<PK>> <<FK>>
+    * keyword_name: VARCHAR(30) <<PK>> <<FK>>
     --
 }
 
 entity Keyword  {
-    * id: SERIAL <<PK>>
+    * name: VARCHAR(30) <<PK>>
     --
-    * title: VARCHAR(30)
 }
 
 entity user {
+    ' The extra id is necessary for using simplewebauthn:
     * id: SERIAL <<PK>>
     --
     * username VARCHAR(30) UNIQUE <<SK>>
@@ -62,5 +62,6 @@ note right of authenticator: Users can register multiple Authenticators\n(e.g. P
 
 legend
     Attributes with a • (list marker) have the NOT NULL constraint
+    Attributes without a • (list marker) have the DEFAULT NULL
 endlegend
 @enduml
