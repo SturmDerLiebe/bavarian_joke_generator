@@ -22,12 +22,12 @@ entity joke {
 
 entity jk_pair {
     * joke_id: BIGINT UNSIGNED <<PK>> <<FK>>
-    * keyword_name: VARCHAR(30) <<PK>> <<FK>>
+    * keyword_title: VARCHAR(30) <<PK>> <<FK>>
     --
 }
 
 entity Keyword  {
-    * name: VARCHAR(30) <<PK>>
+    * title: VARCHAR(30) <<PK>>
     --
 }
 

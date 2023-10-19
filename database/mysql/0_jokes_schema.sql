@@ -3,25 +3,24 @@ CREATE DATABASE IF NOT EXISTS bavarian_jokes;
 USE bavarian_jokes;
 
 CREATE TABLE
-  IF NOT EXISTS user (
+IF NOT EXISTS user (
     id SERIAL,
     username VARCHAR(30) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (username)
-  );
+);
 
 CREATE TABLE
-  IF NOT EXISTS authenticator (
+IF NOT EXISTS authenticator (
     id SERIAL,
     credentialid TEXT NOT NULL,
     credentialpublickey BLOB NOT NULL,
     counter BIGINT UNSIGNED NOT NULL,
-    credentialdevicetype ENUM ('singleDevice', 'multiDevice') NOT NULL,
+    credentialdevicetype ENUM('singleDevice', 'multiDevice') NOT NULL,
     credentialbackedup BOOL NOT NULL,
     user_id BIGINT UNSIGNED NOT NULL,
     transports
-    SET
-      (
+    SET(
         'ble',
         'cable',
         'hybrid',
@@ -29,29 +28,38 @@ CREATE TABLE
         'nfc',
         'smart-card',
         'usb'
-      ) DEFAULT NULL,
-      PRIMARY KEY (id),
-      FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE
-  );
+    ) DEFAULT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES user (
+        id
+    ) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 CREATE TABLE
-  IF NOT EXISTS joke (
+IF NOT EXISTS joke (
     id SERIAL,
     content TEXT NOT NULL,
     explanation TEXT NOT NULL,
     submitted_by BIGINT UNSIGNED DEFAULT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (submitted_by) REFERENCES user (id) ON DELETE SET NULL ON UPDATE CASCADE
-  );
+    FOREIGN KEY (submitted_by) REFERENCES user (
+        id
+    ) ON DELETE SET NULL ON UPDATE CASCADE
+);
 
 CREATE TABLE
-  IF NOT EXISTS keyword (name VARCHAR(30) NOT NULL, PRIMARY KEY (name));
+IF NOT EXISTS keyword (title VARCHAR(30) NOT NULL, PRIMARY KEY (title));
 
 CREATE TABLE
-  IF NOT EXISTS jk_pair (
+IF NOT EXISTS jk_pair (
     joke_id BIGINT UNSIGNED NOT NULL,
-    keyword_name VARCHAR(30) NOT NULL,
-    PRIMARY KEY (joke_id, keyword_name),
-    FOREIGN KEY (joke_id) REFERENCES joke (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (keyword_name) REFERENCES keyword (name) ON DELETE CASCADE ON UPDATE CASCADE
-  );
+    keyword_title VARCHAR(30) NOT NULL,
+    PRIMARY KEY (joke_id, keyword_title),
+    FOREIGN KEY (joke_id) REFERENCES joke (
+        id
+    ) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (keyword_title) REFERENCES keyword (
+        title
+    ) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
