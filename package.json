@@ -9,13 +9,14 @@
     "preview": "vite preview",
     "test": "playwright test",
     "jest": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=environment/.env.test jest --setupFiles=dotenv/config --detectOpenHandles",
-    "format": "prettier . --write"
+    "format": "prettier . --write **/*.sql"
   },
   "devDependencies": {
     "@playwright/test": "^1.38.0",
     "@types/node": "^20.6.3",
     "jest": "^29.7.0",
     "prettier": "^3.0.3",
+    "prettier-plugin-sql": "^0.15.1",
     "vite": "^4.4.5"
   },
   "dependencies": {
