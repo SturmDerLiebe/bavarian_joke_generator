@@ -9,6 +9,7 @@ const USERS = {
   /** User with SELECT privileges only */
   reader: "reader",
   submitter: "submitter",
+  loggeed_in_user: "logged_in_user",
 };
 
 /**
