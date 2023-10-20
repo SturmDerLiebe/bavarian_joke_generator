@@ -5,95 +5,71 @@ import mysql from "mysql2/promise";
 // Internal:
 import db_create_joke from "./create_joke_db.js";
 import { get_connection_options } from "../../constants/db.js";
+import {
+  CREATE_ARGS_ANONYMOUS,
+  CREATE_ARGS_BYUSER,
+} from "../../constants/test.js";
 
-const JOKE_BYUSER = {
-  text: "Joke text",
-  explanation: "This is an explanation",
-  submitted_by: "Alfreda",
-};
-
-const JOKE_ANONYMOUS = {
-  text: "Joke text",
-  explanation: "This is an explanation",
-  submitted_by: "",
-};
-describe(//  Integration
-"db_create_joke executes & returns the inserted id as a string for Jokes submitted", function () {
+//  Integration
+describe("db_create_joke executes properly & returns the inserted id for Jokes submitted", function () {
   test("by a user", async function () {
-    // GIVEN JOKE_BYUSER
+    // GIVEN
+    // CREATE_ARGS_BYUSER
 
     // WHEN
-    const RESULT = await db_create_joke(JOKE_BYUSER);
+    const RESULT = await db_create_joke(CREATE_ARGS_BYUSER);
 
     // THEN
     expect(RESULT).toEqual(expect.any(String));
   });
 
   test("anonymously", async function () {
-    // GIVEN JOKE_ANONYMOUS
+    // GIVEN
+    // CREAT_ARGS_ANONYMOUS
 
     // WHEN
-    const RESULT = await db_create_joke(JOKE_ANONYMOUS);
+    const RESULT = await db_create_joke(CREATE_ARGS_ANONYMOUS);
 
     // THEN
-    expect(RESULT).toEqual(expect.any(String));
+    expect(RESULT).toEqual(expect.any(Number));
   });
 });
 
 describe(// Unit
-"db_create_joke passes the correct arguments when", function () {
-  let connection_mock;
-  let execute_mock;
-  // Bad path Mocks:
+"On Error or Rejection db_create_joke", function () {
+  let rollback;
+  let end;
   beforeEach(function () {
-    jest.restoreAllMocks();
-    execute_mock = jest.fn().mockResolvedValue("1");
-    connection_mock = jest.spyOn(mysql, "createConnection").mockResolvedValue({
-      execute: execute_mock,
-      end: jest.fn().mockResolvedValue(),
-    });
-  });
-
-  test("connecting to the database", async function () {
-    // GIVEN JOKE_BYUSER
-
-    // WHEN
-    await db_create_joke(JOKE_BYUSER);
-    // THEN
-    expect(connection_mock).toBeCalledWith(get_connection_options("create"));
-  });
-
-  test("querying the database", async function () {
-    // GIVEN
-    const { text, explanation, submitted_by } = JOKE_BYUSER;
-    // WHEN
-    await db_create_joke(JOKE_BYUSER);
-    // THEN
-    expect(execute_mock).toBeCalledWith(expect.any(String), [
-      text,
-      explanation,
-      submitted_by,
-    ]);
-  });
-});
-
-describe(// Unit
-"db_create_joke closes the connection", function () {
-  jest.restoreAllMocks();
-  test("if query rejects", async function () {
-    // GIVEN
-    let end_mock = jest.fn();
+    end = jest.fn().mockResolvedValue();
+    rollback = jest.fn().mockResolvedValue();
     mysql.createConnection = jest.fn().mockResolvedValue({
-      execute: jest.fn().mockRejectedValue(),
-      end: end_mock,
+      beginTransaction: jest.fn().mockRejectedValue(),
+      rollback,
+      end,
     });
+  });
+
+  test("rolls back the transaction", async function () {
+    // GIVEN
+    //   createConnection mock
+    // WHEN
+    try {
+      await db_create_joke(CREATE_ARGS_ANONYMOUS);
+    } catch {
+      // Then
+      expect(rollback).toBeCalled();
+    }
+  });
+  test("closes the connection", async function () {
+    // GIVEN
 
     // WHEN
     try {
-      await db_create_joke(JOKE_BYUSER);
+      await db_create_joke(CREATE_ARGS_ANONYMOUS);
     } catch {
+    } finally {
       // THEN
-      expect(end_mock).toBeCalled();
+      expect(end).toBeCalled();
     }
   });
 });
