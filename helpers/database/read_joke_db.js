@@ -30,7 +30,7 @@ async function db_read_joke(keyword) {
       FROM joke AS j
       INNER JOIN jk_pair AS jkp ON j.id = jkp.joke_id
       LEFT JOIN user as u ON j.submitted_by = u.id
-      WHERE jkp.title = ?;
+      WHERE jkp.keyword_title = ?;
 `,
       [keyword],
     );
