@@ -1,6 +1,7 @@
 "use strict";
 
-import { expect, test, describe } from "@jest/globals";
+import { jest, expect, test, describe, beforeEach } from "@jest/globals";
+import mysql from "mysql2/promise";
 // Internal:
 import db_read_joke from "./read_joke_db.js";
 import db_create_joke from "./create_joke_db.js";
@@ -9,8 +10,9 @@ import {
   CREATE_ARGS_ANONYMOUS,
   CREATE_ARGS_BYUSER,
   EXISTING_KEYWORD,
-  JOKE_RESULT,
+  ANONYMOUS_JOKE,
   NONEXISTING_KEYWORD,
+  USER_JOKE,
 } from "../../constants/test.js";
 
 describe("db_read_joke", function () {
@@ -25,7 +27,7 @@ describe("db_read_joke", function () {
     const JOKE_DATA = await db_read_joke(EXISTING_KEYWORD);
 
     // THEN it should return an array of two joke data objects:
-    expect(JOKE_DATA).toEqual(expect.arrayContaining(JOKE_RESULT));
+    expect(JOKE_DATA).toEqual(expect.arrayContaining([USER_JOKE, USER_JOKE]));
   });
 
   test(", given a keyword not present yet, returns null", async function () {
