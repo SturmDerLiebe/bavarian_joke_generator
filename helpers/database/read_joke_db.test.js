@@ -56,3 +56,23 @@ describe("db_read_joke", function () {
     expect(JOKE_DATA).toHaveLength(0);
   });
 });
+
+// Unit
+describe("On Error or Rejection db_read_joke", function () {
+  let end;
+  beforeEach(function () {
+    end = jest.fn().mockResolvedValue();
+    mysql.createConnection = jest.fn().mockResolvedValue({
+      execute: jest.fn().mockRejectedValue(new Error()),
+      end,
+    });
+  });
+
+  test("closes the connection", async function () {
+    // GIVEN
+    // WHEN
+    await expect(db_read_joke(EXISTING_KEYWORD)).rejects.toThrow();
+    // THEN
+    expect(end).toBeCalled();
+  });
+});

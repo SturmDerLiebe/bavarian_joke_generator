@@ -4,7 +4,6 @@ import { jest, expect, test, describe, beforeEach } from "@jest/globals";
 import mysql from "mysql2/promise";
 // Internal:
 import db_create_joke from "./create_joke_db.js";
-import { get_connection_options } from "../../constants/db.js";
 import {
   CREATE_ARGS_ANONYMOUS,
   CREATE_ARGS_BYUSER,
@@ -43,7 +42,7 @@ describe(// Unit
     end = jest.fn().mockResolvedValue();
     rollback = jest.fn().mockResolvedValue();
     mysql.createConnection = jest.fn().mockResolvedValue({
-      beginTransaction: jest.fn().mockRejectedValue(),
+      beginTransaction: jest.fn().mockRejectedValue(new Error()),
       rollback,
       end,
     });
@@ -51,25 +50,18 @@ describe(// Unit
 
   test("rolls back the transaction", async function () {
     // GIVEN
-    //   createConnection mock
     // WHEN
-    try {
-      await db_create_joke(CREATE_ARGS_ANONYMOUS);
-    } catch {
-      // Then
-      expect(rollback).toBeCalled();
-    }
+    await expect(db_create_joke(CREATE_ARGS_ANONYMOUS)).rejects.toThrow();
+    // THEN
+    expect(rollback).toBeCalled();
   });
+
   test("closes the connection", async function () {
     // GIVEN
 
     // WHEN
-    try {
-      await db_create_joke(CREATE_ARGS_ANONYMOUS);
-    } catch {
-    } finally {
-      // THEN
-      expect(end).toBeCalled();
-    }
+    await expect(db_create_joke(CREATE_ARGS_ANONYMOUS)).rejects.toThrow();
+    // THEN
+    expect(end).toBeCalled();
   });
 });
