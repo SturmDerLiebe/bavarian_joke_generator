@@ -22,10 +22,16 @@ const CREATE_ARGS_ANONYMOUS = {
 const EXISTING_KEYWORD = KEYWORDS[0];
 const NONEXISTING_KEYWORD = "nonexistent";
 
-const JOKE_RESULT = [
-  { id: expect.any(String), ...BASE_JOKE, submitted_by: expect.any(String) },
-  { id: expect.any(String), ...BASE_JOKE, submitted_by: "Anonymous" },
-];
+const ANONYMOUS_JOKE = {
+  id: expect.any(String),
+  ...BASE_JOKE,
+  submitted_by: "Anonymous",
+};
+const USER_JOKE = {
+  id: expect.any(String),
+  ...BASE_JOKE,
+  submitted_by: expect.any(String),
+};
 
 export {
   BASE_JOKE,
@@ -33,5 +39,6 @@ export {
   CREATE_ARGS_ANONYMOUS,
   EXISTING_KEYWORD,
   NONEXISTING_KEYWORD,
-  JOKE_RESULT,
+  ANONYMOUS_JOKE,
+  USER_JOKE,
 };
