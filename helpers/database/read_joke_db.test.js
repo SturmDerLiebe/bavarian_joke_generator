@@ -15,26 +15,27 @@ import {
   USER_JOKE,
 } from "../../constants/test.js";
 
-describe("db_read_joke", function () {
-  test(", given an existing keyword, returns all jokes' data in an array", async function () {
-    // GIVEN the keyword exists in the db and has two jokes associated with it:
+describe("db_read_joke returns jokes", function () {
+  test("of anonymous submitters", async function () {
+    // GIVEN
     await Promise.all([
       db_create_joke(CREATE_ARGS_BYUSER),
       db_create_joke(CREATE_ARGS_ANONYMOUS),
     ]);
 
-    // WHEN the function is called:
+    // WHEN
     const JOKE_DATA = await db_read_joke(EXISTING_KEYWORD);
 
     // THEN it should return an array of two joke data objects:
     expect(JOKE_DATA).toEqual(expect.arrayContaining([USER_JOKE, USER_JOKE]));
   });
 
-  test(", given a keyword not present yet, returns null", async function () {
-    // GIVEN the keyword does not exist
-    // WHEN the function is called:
+describe("db_read_joke", function () {
+  test("returns empty array for keywords not paired with a joke", async function () {
+    // GIVEN
+    // WHEN
     const JOKE_DATA = await db_read_joke(NONEXISTING_KEYWORD);
-    // THEN it should return null:
+    // THEN
     expect(JOKE_DATA).toHaveLength(0);
   });
 });
