@@ -2,9 +2,7 @@
 
 import mysql from "mysql2/promise";
 // Constants:
-import { USERS, DATABASE_NAME } from "../../constants/db.js";
-
-const USER = USERS.reader;
+import { get_connection_options } from "../../constants/db.js";
 
 /**
  * Reads all jokes from the databes matching the given {@link keyword}.
@@ -13,15 +11,7 @@ const USER = USERS.reader;
  * @throws {Error} If any connection error or similar happens.
  */
 async function db_read_joke(keyword) {
-  const CONNECTION = await mysql.createConnection({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: USER,
-    password: process.env[`DB_PW_${USER.toUpperCase()}`],
-    database: DATABASE_NAME,
-    supportBigNumbers: true,
-    bigNumberStrings: true,
-  });
+  const CONNECTION = await mysql.createConnection(get_connection_options("read"));
   try {
     // The following SQL first joins the joke wih the keyword table and then joins with the user table wherever the user id matches
     const [ROWS] = await CONNECTION.execute(

@@ -1,5 +1,6 @@
 import { expect, defineConfig } from "@playwright/test";
 import dotenv from "dotenv";
+import { SSR_PORT } from "./constants/api";
 
 dotenv.config({
   path: "./environment/.env.test",
@@ -49,7 +50,7 @@ export default defineConfig({
       testDir: "./api/ssr",
       name: "ssr",
       use: {
-        baseURL: `http://127.0.0.1:${process.env.SSR_PORT}`,
+        baseURL: `http://127.0.0.1:${SSR_PORT}`,
       },
     },
   ],
