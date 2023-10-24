@@ -9,7 +9,7 @@ import { SSR_PORT } from "../../constants/api.js";
 const APP = express();
 
 APP.set("view engine", "pug");
-APP.get("/:keyword", async function(req, res) {
+APP.get("/:keyword", async function (req, res) {
   try {
     const KEYWORD = req.params.keyword;
     if (!is_valid_keyword(KEYWORD)) {

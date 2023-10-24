@@ -15,15 +15,15 @@ const USERS = {
 /**
  * The main database
  * @readonly
-  * @default
+ * @default
  */
 const DATABASE_NAME = "bavarian_jokes";
 
 /**
-  * The port on which the database is running
-  * @readonly
-  * @default
-  */
+ * The port on which the database is running
+ * @readonly
+ * @default
+ */
 const DATABSE_PORT = 4000;
 
 /**

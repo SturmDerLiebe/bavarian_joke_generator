@@ -11,7 +11,9 @@ import { get_connection_options } from "../../constants/db.js";
  * @throws {Error} If any connection error or similar happens.
  */
 async function db_read_joke(keyword) {
-  const CONNECTION = await mysql.createConnection(get_connection_options("read"));
+  const CONNECTION = await mysql.createConnection(
+    get_connection_options("read"),
+  );
   try {
     // The following SQL first joins the joke wih the keyword table and then joins with the user table wherever the user id matches
     const [ROWS] = await CONNECTION.execute(

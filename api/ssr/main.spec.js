@@ -2,8 +2,8 @@
 
 import { test, expect } from "@playwright/test";
 
-test.describe("On Error the /:keyword route responds with", function(request) {
-  test("a 4xx code on a client error", async function({ request }) {
+test.describe("On Error the /:keyword route responds with", function (request) {
+  test("a 4xx code on a client error", async function ({ request }) {
     // GIVEN
     const INVALID = "Ungültig";
     // WHEN
@@ -13,7 +13,7 @@ test.describe("On Error the /:keyword route responds with", function(request) {
   });
 
   // If the database is running test will fail -> remove .fail:
-  test.fail("a 5xx code on a server error", async function({ request }) {
+  test.fail("a 5xx code on a server error", async function ({ request }) {
     // GIVEN
     const VALID = "Test";
     // This is expected to fail when the server is not running
@@ -24,7 +24,7 @@ test.describe("On Error the /:keyword route responds with", function(request) {
   });
 });
 
-test("Server runs", async function({ request }) {
+test("Server runs", async function ({ request }) {
   // GIVEN
   // WHEN
   const RESPONSE = await request.get("/valid");
