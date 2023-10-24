@@ -1,4 +1,9 @@
 import { expect, defineConfig } from "@playwright/test";
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: "./environment/.env.test",
+});
 
 expect.extend({
   toBeWithinRange(received, floor, ceiling) {
@@ -18,12 +23,6 @@ expect.extend({
 });
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
-
-/**
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
@@ -40,9 +39,6 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
@@ -50,17 +46,11 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      testDir: "./api",
-      name: "read_joke",
-      testMatch: "read_joke.spec.js",
-      baseURL: "http://127.0.0.1:3001/api",
+      testDir: "./api/ssr",
+      name: "ssr",
+      use: {
+        baseURL: `http://127.0.0.1:${process.env.SSR_PORT}`,
+      },
     },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });

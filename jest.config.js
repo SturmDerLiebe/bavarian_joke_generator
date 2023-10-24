@@ -2,7 +2,11 @@ const config = {
   projects: [
     {
       displayName: "database",
-      testMatch: ["**/database/*.test.js"],
+      roots: ["<rootDir>/helpers/database/"],
+    },
+    {
+      displayName: "api",
+      roots: ["<rootDir>/helpers/api/"],
     },
   ],
 };

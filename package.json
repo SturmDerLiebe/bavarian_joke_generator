@@ -7,8 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "playwright test",
-    "jest": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=environment/.env.test jest --setupFiles=dotenv/config --detectOpenHandles",
+    "ssr-test": "NODE_ENV=test && node -r dotenv/config api/ssr/main.js dotenv_config_path=environment/.env.$NODE_ENV",
+    "playwright": "NODE_ENV=test playwright test --project",
+    "jest": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=environment/.env.test jest --setupFiles=dotenv/config --detectOpenHandles --selectProjects",
     "format": "prettier . --write"
   },
   "devDependencies": {
