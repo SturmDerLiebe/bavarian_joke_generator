@@ -2,11 +2,11 @@
 public
 
 # playwright
-
-# gitignnore by vite:
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+# gitignnore by vite:
 
 # Logs
 logs
