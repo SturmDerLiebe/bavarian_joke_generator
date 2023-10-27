@@ -5,6 +5,7 @@
   "version": "0.0.0",
   "author": "Chritian Sturm <christian.sturm@code.berlin>",
   "type": "module",
+  "main": "api/ssr/main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
