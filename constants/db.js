@@ -1,4 +1,6 @@
 "use strict";
+import dotenv from "dotenv";
+dotenv.config();
 
 /**
  * The user to access the database
@@ -18,13 +20,6 @@ const USERS = {
  * @default
  */
 const DATABASE_NAME = "bavarian_jokes";
-
-/**
- * The port on which the database is running
- * @readonly
- * @default
- */
-const DATABSE_PORT = 4000;
 
 /**
  * @typedef {Object} Connection_Options
@@ -57,7 +52,7 @@ function get_connection_options(action) {
   }
   return {
     host: process.env.DB_HOST,
-    port: DATABSE_PORT,
+    port: process.env.DB_PORT,
     user: user,
     password: process.env[`DB_PW_${user.toUpperCase()}`],
     database: DATABASE_NAME,
