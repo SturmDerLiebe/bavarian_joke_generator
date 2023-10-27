@@ -1,18 +1,60 @@
 services:
+  # MYSQL DATABASE
   joke_database:
     image: mysql:latest
     volumes:
-      - "../database/mysql:/docker-entrypoint-initdb.d"
+      - "./database/mysql:/docker-entrypoint-initdb.d:ro"
       # Add the following line for production:
       # - db_data:/var/lib/mysql
+      # Delete in production:
     ports:
-      - "4000:3306" # Change to expose: 3306 in production
+      - "${DB_PORT}:${DB_PORT}"
+    expose:
+      - "${DB_PORT}"
+    networks:
+      - sql
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_ONETIME_PASSWORD: "yes"
     command:
       - --host-cache-size=3
-# Uncomment in production:
-#networks:
-#  sql:
-#volumes:
-#  db-data:
+  # SERVER SIDE RENDERING:
+  joke_ssr:
+    image: ssr:latest
+    build:
+      context: ./
+      dockerfile: ssr.Dockerfile
+    # Delete in production:
+    ports:
+      - "${SSR_PORT}:${SSR_PORT}"
+    expose:
+      - "${SSR_PORT}"
+    networks:
+      - sql
+      - web
+    env_file:
+      - ./environment/.env.development
+  # NGINX:
+  joke_webserver:
+    image: nginx:stable
+    volumes:
+      - "./static:/usr/share/nginx/html:ro"
+      - "./public:/usr/share/nginx/public:ro"
+      - "./nginx/templates:/etc/nginx/templates:ro"
+      - "./nginx/config/nginx.conf:/etc/nginx/nginx.conf:ro"
+    ports:
+      - "${HTTP_PORT}:${HTTP_PORT}"
+      - "${HTTPS_PORT}:${HTTPS_PORT}"
+    networks:
+      - web
+    env_file:
+      - ./environment/.env.development
+    # Delete in production
+    command: [ nginx-debug, "-g", "daemon off;" ]
+
+networks:
+  sql:
+  web:
+    # Uncomment in production:
+    #volumes:
+    #  db-data:
