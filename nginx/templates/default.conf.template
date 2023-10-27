@@ -1,0 +1,20 @@
+server {
+    # listen ${HTTP_PORT};
+    # listen [::]:${HTTP_PORT};
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location / {
+    }
+
+    location ^~ /public/ {
+        root /usr/share/nginx;
+    }
+
+    location ^~ /ssr/ {
+        # pass will exchange ssr/ for /:
+        proxy_pass "http://${SSR_HOST}:${SSR_PORT}/";
+        proxy_http_version 1.1;
+        proxy_set_header   "Connection" "";
+    }
+}
