@@ -9,6 +9,8 @@
   <body>
     <main>
       <h1>Griasd eich zum Bavarian Joke Generator</h1>
+
+      <!-- Joke Generator: -->
       <form action="" method="">
         <label for="keyword">What should the joke be about?</label>
         <br />
@@ -28,6 +30,17 @@
         <label for="joke_output">Your jokes:</label>
         <br />
         <output id="joke_output" for="keyword"> Not yet generated </output>
+      </form>
+
+      <!-- Joke Submission: -->
+      <form action="" method="">
+        <label for="bavarian_joke">Joke in Bavarian:</label>
+        <input
+          id="bavarian_joke"
+          type="textarea"
+          name="bavarian_joke"
+          pattern="[A-Za-z0-9öüäÖÜÄ\s.,:;'ʼ&quot„‟–—\-]{10}"
+        />
       </form>
     </main>
   </body>
