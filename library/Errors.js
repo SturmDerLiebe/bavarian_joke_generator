@@ -13,4 +13,17 @@ class Client_Error extends Error {
   }
 }
 
-export { Client_Error };
+/**
+ * An extension class to filter 404 errors
+ * @extends Client_Error
+ */
+class Not_Found_Error extends Client_Error {
+  /**
+   * @param {string} message - The error message.
+   */
+  constructor(message) {
+    super(message);
+  }
+}
+
+export { Client_Error, Not_Found_Error };
