@@ -7,41 +7,121 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main>
+    <header>
       <h1>Griasd eich zum Bavarian Joke Generator</h1>
+    </header>
+    <main>
+      <article>
+        <h2>Generate a Joke</h2>
+        <!-- Joke Generator: -->
+        <form
+          action="/ssr/"
+          method="get"
+          title="Only use English letters for keywords"
+        >
+          <h3>What should the joke be about?</h3>
+          <label for="keyword"
+            >Keyword:
+            <!-- Validates only one english lettered word -->
+            <input
+              id="keyword"
+              name="keyword"
+              type="search"
+              placeholder="e.g. Dog"
+              pattern="^[A-Za-z]+$"
+              minlength="2"
+              aria-describedby="keyword_hint"
+              required
+          /></label>
+          <br />
+          <button type="submit" data-testid="gen-btn">Generate Joke</button>
+        </form>
 
-      <!-- Joke Generator: -->
-      <form action="" method="">
-        <label for="keyword">What should the joke be about?</label>
-        <br />
-        <input
-          id="keyword"
-          name="keyword"
-          type="search"
-          placeholder="e.g. Dog"
-          pattern="[A-z]+"
-          minlength="2"
-          aria-describedby="input_hint"
-          required
-        />
-        <span id="input_hint">Only use English letters!</span>
-        <br />
-        <button type="submit">Generate Joke</button>
-        <label for="joke_output">Your jokes:</label>
-        <br />
-        <output id="joke_output" for="keyword"> Not yet generated </output>
-      </form>
+        <hr />
 
-      <!-- Joke Submission: -->
-      <form action="" method="">
-        <label for="bavarian_joke">Joke in Bavarian:</label>
-        <input
-          id="bavarian_joke"
-          type="textarea"
-          name="bavarian_joke"
-          pattern="[A-Za-z0-9öüäÖÜÄ\s.,:;'ʼ&quot„‟–—\-]{10}"
-        />
-      </form>
+        <!-- Joke Submission: -->
+        <h2>Submit a joke</h2>
+        <form
+          action="/ssr/submit"
+          method="post"
+          title='- For Keywords only use English letters.
+- For Content only use German letters.
+- For Explanation only use English letters.
+- Use a format like "Mouse, Dog, Cat" for multiple Keywords.'
+        >
+          <h3>Your Bavarian joke</h3>
+          <label for="content">Content:</label>
+          <!-- Validates only German sentences/words with the specified range of characters -->
+          <textarea
+            id="content"
+            name="content"
+            placeholder="Es war amoi..."
+            cols="50"
+            rows="10"
+            wrap="soft"
+            minlength="10"
+            maxlength="1000"
+            pattern="^(?:[A-Za-zöüäÖÜÄ0-9.,:;'ʼ&quot;„‟–—\-]+\s?)+$"
+            aria-describedby="content_hint"
+            required
+          ></textarea>
+          <h3>Explain or translate your joke in English</h3>
+          <label for="explanation">Explanation:</label>
+          <!-- Validates only English sentences/words with the specified range of characters -->
+          <!-- PATTERN TAG NOT SUPPORTED: implement in js-->
+          <textarea
+            id="explanation"
+            name="explanation"
+            placeholder="Once upon a time..."
+            cols="50"
+            rows="10"
+            wrap="soft"
+            minlength="10"
+            maxlength="1000"
+            pattern="^(?:[A-Za-z0-9.,:;'ʼ&quot;„‟–—\-]+\s?)+$"
+            aria-describedby="explanation_hint"
+            required
+          ></textarea>
+          <br />
+          <h3>Which key words would you associate with your joke?</h3>
+          <label for="keywords"
+            >Keywords:
+            <!-- Validates only "Dog" or "Dog, Cat"-like strings -->
+            <input
+              id="keywords"
+              type="text"
+              name="keywords"
+              pattern="^[A-Za-z]+(?:,\s[A-Za-z]+)*$"
+              placeholder="e.g. Dog"
+              minlength="2"
+              aria-describedby="keywords_hint"
+              required
+          /></label>
+          <br />
+          <button type="submit">Submit Joke</button>
+        </form>
+
+        <hr />
+
+        <footer>
+          <ul>
+            <li id="keyword_hint" aria-role="tooltip">
+              For <b>Keywords</b> only use <em>English</em> letters.
+            </li>
+            <li id="content_hint" aria-role="tooltip">
+              For <b>Content</b> only use <em>German</em> letters.
+            </li>
+            <li id="explanation_hint" aria-role="tooltip">
+              For <b>Explanation</b> only use <em>English</em> letters.
+            </li>
+            <li id="keywords_hint" aria-role="tooltip">
+              Use a format like
+              <kbd>Mouse<kbd>,</kbd> Dog<kbd>,</kbd> Cat</kbd> for multiple
+              <b>Keywords</b>.
+            </li>
+          </ul>
+        </footer>
+      </article>
     </main>
   </body>
 </html>
