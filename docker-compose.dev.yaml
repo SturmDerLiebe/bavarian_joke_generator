@@ -3,7 +3,8 @@ services:
   joke_database:
     image: mysql:latest
     volumes:
-      - "./database/mysql:/docker-entrypoint-initdb.d:ro"
+      # sue /prod id production
+      - "./database/mysql/dev:/docker-entrypoint-initdb.d:ro"
       # Add the following line for production:
       # - db_data:/var/lib/mysql
       # Delete in production:
@@ -50,7 +51,7 @@ services:
     env_file:
       - ./environment/.env.development
     # Delete in production
-    command: [ nginx-debug, "-g", "daemon off;" ]
+    command: [nginx-debug, "-g", "daemon off;"]
 
 networks:
   sql:

@@ -18,3 +18,8 @@ CREATE USER IF NOT EXISTS logged_in_user IDENTIFIED BY 'logged_in_userPW';
 
 GRANT DELETE,
 UPDATE (content, explanation) ON bavarian_jokes.joke TO logged_in_user;
+
+-- TESTER is not part of production:
+CREATE USER IF NOT EXISTS tester IDENTIFIED BY 'testerPW';
+
+GRANT ALL ON bavarian_jokes.* TO tester;
