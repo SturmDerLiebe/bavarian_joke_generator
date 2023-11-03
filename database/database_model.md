@@ -1,15 +1,41 @@
-# Data Model
+# Database Model
 ## Bavarian joke Simulator
-### Prerequesites:
-- A user can search for a bavarian joke by submitting an English keyword
-- A user can submit a bavarian joke alongside any related keywords
-- A bavarian joke is accompanied by its explanation in English
-- A user can log in to edit and delete their submissions
-- A user can also submit a joke without logging in
+### Minimum Features:
+- A user can search for *any* Bavarian jokes by submitting *one* English keyword
+- A user can submit a Bavarian joke alongside _at least one_, related keywords
+- A Bavarian joke is accompanied by its explanation in English
+- A user can submit a joke without logging in
+### Additional Features:
+- Searching via keyword suggests an existing keyword dropdown
+- A user can sign up alongside submitting a joke
+- A user can log in to submit and view, edit & delete their submissions
+- A user can log in via a webatuhn authenticator
+- Users can register _multiple_ authenticators (e.g. Phone, Yubikey, etc.)
+<hr style="page-break-after: always"/>
 
+#### Conceptual Model
 @startuml
 'skinparam linetype ortho
-'scale 2
+scale 2
+!theme vibrant
+
+entity joke
+entity keyword
+entity user
+entity authenticator
+
+joke }|--|{ keyword : is associated with >
+joke }|--o| user : can be submitted by >
+user ||--|{ authenticator : loggs in via >
+
+@enduml
+
+<hr style="page-break-after: always" >
+
+#### Physical Model
+@startuml
+'skinparam linetype ortho
+scale 2
 !theme vibrant
 
 entity joke {
@@ -51,14 +77,10 @@ entity authenticator {
     * user_id: BIGINT UNSIGNED <<FK>>
 }
 
-joke }|--|{ jk_pair : has >
-jk_pair }|--|{ Keyword : is associated with <
-joke }|--o| user : submits <
-user ||--|{ authenticator : logs in with >
-
-note left of jk_pair: Jokes can only be inserted\nwith at least one keyword
-note right of joke: Jokes can be submitted anonymously\nor after logging in 
-note right of authenticator: Users can register multiple Authenticators\n(e.g. Phone, Yubikey, etc.)
+joke ||--|{ jk_pair : has >
+jk_pair }|--|| Keyword : is part of <
+joke }|--o| user : can submitted by >
+user ||--|{ authenticator : logs in via > 
 
 legend
     Attributes with a • (list marker) have the NOT NULL constraint
