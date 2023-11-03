@@ -1,4 +1,4 @@
-import { expect, defineConfig } from "@playwright/test";
+import { expect as baseExpect, defineConfig } from "@playwright/test";
 import dotenv from "dotenv";
 import { SSR_PORT } from "./constants/api";
 
@@ -6,20 +6,44 @@ dotenv.config({
   path: "./environment/.env.test",
 });
 
-expect.extend({
+// Custom Matchers:
+export const expect = baseExpect.extend({
+  // i.e. for Error Codes:
   toBeWithinRange(received, floor, ceiling) {
-    const pass = received >= floor && received <= ceiling;
-    if (pass) {
-      return {
-        message: () => "passed",
-        pass: true,
-      };
-    } else {
-      return {
-        message: () => "failed",
-        pass: false,
-      };
+    let pass = received >= floor && received <= ceiling;
+    let matcherResult;
+    try {
+      baseExpect(pass).toBeTruthy();
+    } catch (e) {
+      matcherResult = e.matcherResult;
     }
+    return {
+      message: pass
+        ? () => `${received} in range ${floor}-${ceiling}`
+        : () => `${received} not in range ${floor}-${ceiling}`,
+      pass,
+      name: "toBeWithinRange",
+      expected: [ceiling, floor],
+    };
+  },
+
+  // e.g. for input tags:
+  async toBeValid(locator) {
+    let pass = await locator.evaluate((node) => node.reportValidity());
+    let matcherResult;
+    try {
+      baseExpect(pass).toBeTruthy();
+    } catch (e) {
+      matcherResult = e.matcherResult;
+    }
+    return {
+      message: pass
+        ? () => `${locator} is valid`
+        : () => `${locator} is invalid`,
+      pass,
+      name: "toBeValid",
+      expected: "Valid input",
+    };
   },
 });
 
@@ -51,6 +75,13 @@ export default defineConfig({
       name: "ssr",
       use: {
         baseURL: `http://127.0.0.1:${SSR_PORT}`,
+      },
+    },
+    {
+      testDir: "./e2e",
+      name: "e2e",
+      use: {
+        baseURL: `http://127.0.0.1:${process.env.HTTP_PORT}`,
       },
     },
   ],
