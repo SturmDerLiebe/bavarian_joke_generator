@@ -7,12 +7,13 @@ test.describe("On Error the /:keyword route responds with", function (request) {
     // GIVEN
     const INVALID = "Ungültig";
     // WHEN
-    const RESPONSE = await request.get(`/${INVALID}`);
+    const RESPONSE = await request.get(`/?keyword=${INVALID}`);
     // THEN
-    expect(RESPONSE.status).toBeWithinRange(400, 499);
+    expect(RESPONSE.status()).toBeWithinRange(400, 499);
   });
-
-  // If the database is running test will fail -> remove .fail:
+});
+// Has to live outside of previous describe block due tue .fail() bug:
+test.describe("Expected to fail:", function () {
   test.fail("a 5xx code on a server error", async function ({ request }) {
     // GIVEN
     const VALID = "Test";
@@ -20,7 +21,7 @@ test.describe("On Error the /:keyword route responds with", function (request) {
     // WHEN
     const RESPONSE = await request.get(`/${VALID}`);
     // THEN
-    expect(RESPONSE.status).toBeWithinRange(500, 599);
+    expect(RESPONSE.status()).toBeWithinRange(500, 599);
   });
 });
 
