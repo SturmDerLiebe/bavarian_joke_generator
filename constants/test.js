@@ -1,6 +1,7 @@
 "use strict";
 
 import { expect } from "@jest/globals";
+import { get_connection_options } from "./db";
 
 const BASE_JOKE = {
   content: "Joke content",
@@ -33,7 +34,18 @@ const USER_JOKE = {
   submitted_by: expect.any(String),
 };
 
+const READ_OPTIONS = {
+  ...get_connection_options("read"),
+  host: process.env.DB_EXTERNAL_HOST,
+};
+const INSERT_OPTIONS = {
+  ...get_connection_options("create"),
+  host: process.env.DB_EXTERNAL_HOST,
+};
+
 export {
+  READ_OPTIONS,
+  INSERT_OPTIONS,
   BASE_JOKE,
   CREATE_ARGS_BYUSER,
   CREATE_ARGS_ANONYMOUS,
