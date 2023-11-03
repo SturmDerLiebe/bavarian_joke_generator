@@ -1,16 +1,21 @@
 extends layout.pug
 
+block title
+    title #{KEYWORD} jokes
+
 block style
     link(rel="stylesheet" href="keyword/styles.css")
 
 block main
-    h1= KEYWORD
+    h2= KEYWORD
     each joke, index in JOKE_DATA
-        +joke_card(joke.id, joke.content, joke.submitted_by)
+        +joke_card(joke.id, joke.content, joke.explanation, joke.submitted_by)
         unless (index === JOKE_DATA.length-1)
             hr
 
-mixin joke_card(id, content, username)
+mixin joke_card(id, content, explanation, submitted_by)
     figure(id=id)
         p= content
-        figcaption submitted by #{user}
+        hr
+        p= explanation
+        figcaption submitted by #{submitted_by}
