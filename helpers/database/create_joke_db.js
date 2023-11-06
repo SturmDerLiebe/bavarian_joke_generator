@@ -7,18 +7,17 @@ import { get_connection_options } from "../../constants/db.js";
 /**
  * Writes the joke to the database.
  * @param {import("../../types/Joke.js").Joke_Submission} joke - The joke object to be written to the database.
+ * @param {import("mysql2").ConnectionOptions} [connection_options] - optional connection options
  * @returns {Promise<string>} id - The id of the inserted joke.
  * @throws {Error} If any connection error or similar happens.
  */
-async function db_create_joke({
-  content,
-  explanation,
-  submitted_by,
-  keywords,
-}) {
+async function db_create_joke(
+  { content, explanation, submitted_by, keywords },
+  connection_options,
+) {
   // Set up connection and queries:
   const CONNECTION = await mysql.createConnection(
-    get_connection_options("create"),
+    connection_options || get_connection_options("create"),
   );
 
   /**
@@ -28,7 +27,7 @@ async function db_create_joke({
   const QUERIES = [
     [
       "INSERT INTO joke(content, explanation, submitted_by) VALUES(?, ?, ?);",
-      [content, explanation, submitted_by], // Insert anonymous submitters (="") as NULL
+      [content, explanation, submitted_by || null], // Insert anonymous submitters (="") as NULL
     ],
     ["SET @j_id = LAST_INSERT_ID();"], // Save new joke_id for following inserts
   ].concat(repeat_keyword_INSERT(keywords));
@@ -63,7 +62,7 @@ async function db_create_joke({
 function execute_query(connection, queries) {
   return queries.map(function (query) {
     const PARAMS = query[1];
-    return connection.execute(query[0], !PARAMS ? null : PARAMS);
+    return connection.execute(query[0], PARAMS || null);
   });
 }
 

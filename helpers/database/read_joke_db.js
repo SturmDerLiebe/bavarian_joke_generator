@@ -7,12 +7,14 @@ import { get_connection_options } from "../../constants/db.js";
 /**
  * Reads all jokes from the databes matching the given {@link keyword}.
  * @param {string} keyword the keyword associated with a joke.
+ * @param {import("mysql2").ConnectionOptions} [connection_options] - optional connection options
  * @returns {Promise<import("../../types/Joke.js").Joke[]>} Object containing the joke data or null if nothing was found.
  * @throws {Error} If any connection error or similar happens.
  */
-async function db_read_joke(keyword) {
+async function db_read_joke(keyword, connection_options) {
+  // Set up connection and queries:
   const CONNECTION = await mysql.createConnection(
-    get_connection_options("read"),
+    connection_options || get_connection_options("read"),
   );
   try {
     // The following SQL first joins the joke wih the keyword table and then joins with the user table wherever the user id matches
