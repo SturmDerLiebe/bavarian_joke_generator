@@ -6,8 +6,8 @@
  * @returns {boolean} - If the keyword is ok or not.
  */
 function is_valid_keyword(keyword) {
-  const REGEX = new RegExp("(?<!.)[A-Za-z]+(?!.)");
-  return REGEX.test(keyword);
+  const REGEX = new RegExp("^[A-Za-z]+$");
+  return keyword && REGEX.test(keyword);
 }
 
 export { is_valid_keyword };
