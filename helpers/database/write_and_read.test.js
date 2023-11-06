@@ -17,7 +17,7 @@ import {
 } from "../../constants/test.js";
 
 /*–––––––––––––––––––––––––––– Integration —–––––––––––––––––––––––––––––––*/
-describe("A jokw is  read correctly from the database, when it is written by", function () {
+describe("A joke is read correctly from the database, when it is written by", function () {
   beforeEach(async function () {
     await delete_all_jokes_and_keywords();
   });
