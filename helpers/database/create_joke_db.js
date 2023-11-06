@@ -78,10 +78,8 @@ function repeat_keyword_INSERT(keywords) {
         "INSERT INTO keyword (title) VALUES (?) ON DUPLICATE KEY UPDATE title=title;",
         [keyword],
       ],
-      [
-        "INSERT INTO jk_pair (joke_id, keyword_title) VALUES (@j_id, ?);",
-        [keyword],
-      ],
+      ["SET @k_id = (SELECT id FROM keyword WHERE title = ?);", [keyword]],
+      ["INSERT INTO jk_pair (joke_id, keyword_id) VALUES (@j_id, @k_id);"],
     ];
   });
 }
