@@ -9,8 +9,8 @@ import {
 import delete_all_jokes_and_keywords from "../helpers/test/delete_jokes";
 import db_create_joke from "../helpers/database/create_joke_db";
 
-test.describe("When requesting a joke on the home/root page on", function() {
-  test("a valid keyword, the user is directed to another page", async function({
+test.describe("When requesting a joke on the home/root page on", function () {
+  test("a valid keyword, the user is directed to another page", async function ({
     page,
   }) {
     // GIVEN
@@ -22,9 +22,9 @@ test.describe("When requesting a joke on the home/root page on", function() {
     await expect(page).not.toHaveTitle("Bavarian Jokes Generator");
   });
   /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
-  test.describe("an invalid keyword, the user stays on the page", function() {
+  test.describe("an invalid keyword, the user stays on the page", function () {
     for (let word of ["Cät", "Do g", "Mo;use"])
-      test(`Keyword: ${word}`, async function({ page }) {
+      test(`Keyword: ${word}`, async function ({ page }) {
         // GIVEN
         // WHEN
         await page.goto("/");
@@ -37,16 +37,16 @@ test.describe("When requesting a joke on the home/root page on", function() {
   });
 });
 
-test.describe("A User requesting a joke from the home page via", function() {
+test.describe("A User requesting a joke from the home page via", function () {
   // BEFORE EACH:
-  test.beforeEach(async function() {
+  test.beforeEach(async function () {
     await delete_all_jokes_and_keywords();
   });
   /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
   // Fails until submit_jokes is implemented
   test.fail(
     "a keyword, is directed to a page showing associated existing jokes",
-    async function({ page }) {
+    async function ({ page }) {
       // GIVEN
       for (let submission of JOKE_SUBMISSIONS) {
         await submit_jokes(submission);
@@ -63,7 +63,7 @@ test.describe("A User requesting a joke from the home page via", function() {
   );
 });
 /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
-test("an unlisted keyword, is directed to a page showing that there are no jokes yet", async function({
+test("an unlisted keyword, is directed to a page showing that there are no jokes yet", async function ({
   page,
 }) {
   // GIVEN
