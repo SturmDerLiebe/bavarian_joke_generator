@@ -7,6 +7,7 @@ import db_create_joke from "./create_joke_db.js";
 import {
   CREATE_ARGS_ANONYMOUS,
   CREATE_ARGS_BYUSER,
+  INSERT_OPTIONS,
 } from "../../constants/test.js";
 
 //  Integration
@@ -16,7 +17,7 @@ describe("db_create_joke executes properly & returns the inserted id for Jokes s
     // CREATE_ARGS_BYUSER
 
     // WHEN
-    const RESULT = await db_create_joke(CREATE_ARGS_BYUSER);
+    const RESULT = await db_create_joke(CREATE_ARGS_BYUSER, INSERT_OPTIONS);
 
     // THEN
     expect(RESULT).toEqual(expect.any(String));
@@ -27,7 +28,7 @@ describe("db_create_joke executes properly & returns the inserted id for Jokes s
     // CREAT_ARGS_ANONYMOUS
 
     // WHEN
-    const RESULT = await db_create_joke(CREATE_ARGS_ANONYMOUS);
+    const RESULT = await db_create_joke(CREATE_ARGS_ANONYMOUS, INSERT_OPTIONS);
 
     // THEN
     expect(RESULT).toEqual(expect.any(Number));
@@ -51,7 +52,9 @@ describe(// Unit
   test("rolls back the transaction", async function () {
     // GIVEN
     // WHEN
-    await expect(db_create_joke(CREATE_ARGS_ANONYMOUS)).rejects.toThrow();
+    await expect(
+      db_create_joke(CREATE_ARGS_ANONYMOUS, INSERT_OPTIONS),
+    ).rejects.toThrow();
     // THEN
     expect(rollback).toBeCalled();
   });
@@ -60,7 +63,9 @@ describe(// Unit
     // GIVEN
 
     // WHEN
-    await expect(db_create_joke(CREATE_ARGS_ANONYMOUS)).rejects.toThrow();
+    await expect(
+      db_create_joke(CREATE_ARGS_ANONYMOUS, INSERT_OPTIONS),
+    ).rejects.toThrow();
     // THEN
     expect(end).toBeCalled();
   });
