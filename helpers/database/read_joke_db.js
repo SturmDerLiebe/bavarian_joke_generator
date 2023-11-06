@@ -18,6 +18,7 @@ async function db_read_joke(keyword, connection_options) {
   );
   try {
     // The following SQL first joins the joke wih the keyword table and then joins with the user table wherever the user id matches
+    // Add SQL to increment the times_searched attr
     const [ROWS] = await CONNECTION.execute(
       `
       SELECT j.id, j.content, j.explanation, IFNULL(u.username, 'Anonymous') AS submitted_by

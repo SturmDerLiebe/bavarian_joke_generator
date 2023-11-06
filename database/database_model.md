@@ -3,14 +3,23 @@
 ### Minimum Features:
 - A user can search for *any* Bavarian jokes by submitting *one* English keyword
 - A user can submit a Bavarian joke alongside _at least one_, related keywords
-- A Bavarian joke is accompanied by its explanation in English
-- A user can submit a joke without logging in
+- A Bavarian joke is accompanied by its required explanation in English
+- A user can submit a joke anonymously without logging in
+    - These jokes can then only be edited & deleted by the site admin
 ### Additional Features:
-- Searching via keyword suggests an existing keyword dropdown
-- A user can sign up alongside submitting a joke
+- A user can sign up before submitting a joke
 - A user can log in to submit and view, edit & delete their submissions
-- A user can log in via a webatuhn authenticator
-- Users can register _multiple_ authenticators (e.g. Phone, Yubikey, etc.)
+    - On joke deletion, the joke-keyword pair gets deleted as well
+    - Changing the assoiated keyword adds a new keyword if it does not exist yet and associates the joke with the new keyword(s)
+- A user can sign up & log in  via webauthn (without a password)
+    - webauthn needs one current challange for a user to be solved by on of the users registered authenticators (i.e. private key)
+- A loggeed in user can register _multiple_ webauthn authenticators (e.g. Phone, Yubikey, etc.)
+- A logged in user can change their username, if the new one does not exist yet
+- A user can search for a Joke by a fuzzy/full-text-search
+- A user is shown an existing keyword dropdown of most searched keywords, when searching via keyword
+- An Admin can delete keywords, on which the associated joke-keyword pair gets deleted
+    - If any joke ends up with no joke-keyword pairs through this, it should still be requestable by the "Other"-keyword
+- An Admin can edit keywords
 <hr style="page-break-after: always"/>
 
 #### Conceptual Model
@@ -41,20 +50,23 @@ scale 2
 entity joke {
     * id: SERIAL <<PK>>
     --
-    * content: TEXT
+    * content: TEXT <<SK>>
     * explanation: TEXT
     submitted_by: BIGINT UNSIGNED <<FK>>
 }
 
 entity jk_pair {
     * joke_id: BIGINT UNSIGNED <<PK>> <<FK>>
-    * keyword_title: VARCHAR(30) <<PK>> <<FK>>
+    * keyword_id: BIGINT UNSIGNED <<PK>>> <<FK>>
     --
 }
 
 entity Keyword  {
-    * title: VARCHAR(30) <<PK>>
+    ' use id instead of title as PK for performance and easier editing of keywords
+    * id: SERIAL <<PK>>
     --
+    * title: VARCHAR(30) <<SK>>
+    searched_times: BIGINT UNSIGNED DEFAULT 0
 }
 
 entity user {
@@ -85,5 +97,6 @@ user ||--|{ authenticator : logs in via >
 legend
     Attributes with a • (list marker) have the NOT NULL constraint
     Attributes without a • (list marker) have the DEFAULT NULL
+    Attributes with <<SK>> have the UNIQUE constraint
 endlegend
 @enduml
