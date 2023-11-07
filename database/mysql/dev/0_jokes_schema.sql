@@ -52,8 +52,8 @@ IF NOT EXISTS joke (
 CREATE TABLE
 IF NOT EXISTS keyword (
     id SERIAL,
-    title VARCHAR(30) NOT NULL, 
-    times_searched BIGINT UNSIGNED DEFAULT 
+    title VARCHAR(30) NOT NULL,
+    times_searched BIGINT UNSIGNED DEFAULT 0,
     PRIMARY KEY (id),
     UNIQUE (title)
 );
