@@ -14,8 +14,17 @@
  * @typedef {Object} Joke_Submission
  * @property {string} content - The content of this joke.
  * @property {string} explanation - The explanation if this joke.
- * @property {string|null} submitted_by - The user id of the submitter. Null signifies an anonymous submission.
+ * @property {string} submitted_by - The user id of the submitter. Empty string signals anonymous user
  * @property {string[]} keywords - The keywords associated with the submitted joke.
+ */
+
+/**
+ * The joke submitted by a user from the frontend.
+ * @typedef {Object} User_Submission
+ * @property {string} content - The content of this joke.
+ * @property {string} explanation - The explanation if this joke.
+ * @property {string} submitted_by - The user id of the submitter. Empty string signals anonymous user
+ * @property {string} keywords - The keywords string submitted by the user
  */
 
 export const Joke_Types = {};
