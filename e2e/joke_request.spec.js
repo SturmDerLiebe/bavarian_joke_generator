@@ -3,7 +3,7 @@
 import { test, expect } from "@playwright/test";
 import {
   VALID_KEYWORD,
-  JOKE_SUBMISSIONS,
+  DISTINCT_JOKE_SUBMISSIONS,
   LISTED_KEYWORD,
 } from "../constants/playwright";
 import delete_all_jokes_and_keywords from "../helpers/test/delete_jokes";
@@ -48,7 +48,7 @@ test.describe("A User requesting a joke from the home page via", function () {
     "a keyword, is directed to a page showing associated existing jokes",
     async function ({ page }) {
       // GIVEN
-      for (let submission of JOKE_SUBMISSIONS) {
+      for (let submission of DISTINCT_JOKE_SUBMISSIONS) {
         await submit_jokes(submission);
       }
       // WHEN
@@ -57,7 +57,7 @@ test.describe("A User requesting a joke from the home page via", function () {
       await page.getByTestId("gen-btn").click();
       // THEN
       expect(await page.locator("figure").all()).toHaveLength(
-        JOKE_SUBMISSIONS.length,
+        DISTINCT_JOKE_SUBMISSIONS.length,
       );
     },
   );
