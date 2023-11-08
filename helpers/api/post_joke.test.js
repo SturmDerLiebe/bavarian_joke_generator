@@ -4,8 +4,8 @@ import { expect, describe, test } from "@jest/globals";
 import { is_valid_joke_data } from "./post_joke.js";
 import { SINGLE_SUBMISSION } from "../../constants/playwright.js";
 
-describe("Returns", function() {
-  test("true, if joke_data is valid", function() {
+describe("Returns", function () {
+  test("true, if joke_data is valid", function () {
     // GIVEN
     // WHEN
     const IS_VALID = is_valid_joke_data(SINGLE_SUBMISSION);
@@ -13,10 +13,10 @@ describe("Returns", function() {
     expect(IS_VALID).toBe(true);
   });
 
-  describe("false, if content is invalid", function() {
+  describe("false, if content is invalid", function () {
     test.each(["", " ", "_Word for Wor_d"])(
       "Testing content: '%s'",
-      function(content) {
+      function (content) {
         // GIVEN
         // WHEN
         const IS_VALID = is_valid_joke_data({ ...SINGLE_SUBMISSION, content });
@@ -26,10 +26,10 @@ describe("Returns", function() {
     );
   });
 
-  describe("false, if explanation is invalid", function() {
+  describe("false, if explanation is invalid", function () {
     test.each(["", " ", "_Word for Wor_d", "Ungültige Wörter"])(
       "Testing explanation: '%s'",
-      function(explanation) {
+      function (explanation) {
         // GIVEN
         // WHEN
         const IS_VALID = is_valid_joke_data({
@@ -42,10 +42,10 @@ describe("Returns", function() {
     );
   });
 
-  describe("false, if keywords string is invalid", function() {
+  describe("false, if keywords string is invalid", function () {
     test.each(["", " ", "Cat Dog", "Dog,Cat"])(
       "Testing keywords string: '%s'",
-      function(keywords_string) {
+      function (keywords_string) {
         // GIVEN
         // WHEN
         const IS_VALID = is_valid_joke_data({

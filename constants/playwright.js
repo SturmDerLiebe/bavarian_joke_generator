@@ -21,7 +21,7 @@ function get_joke_times(n, duplicates = true) {
     return jokes;
   }
   // Return joke array with distinct contents
-  jokes.forEach(function(joke_object) {
+  jokes.forEach(function (joke_object) {
     return (joke_object.content = joke_object.content + "a");
   });
   return jokes;
