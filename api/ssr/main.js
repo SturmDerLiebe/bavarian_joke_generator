@@ -11,10 +11,12 @@ import {
 import { SSR_PORT } from "../../constants/api.js";
 import db_create_joke from "../../helpers/database/create_joke_db.js";
 import { is_valid_joke_data } from "../../helpers/api/post_joke.js";
+import { error } from "console";
 
 const APP = express();
-
+/*——————————————————————————————— SSR ———————————————————————————————————————*/
 APP.set("view engine", "pug");
+
 APP.get("/", async function (req, res) {
   try {
     const KEYWORD = req.query.keyword;
@@ -44,6 +46,29 @@ APP.get("/", async function (req, res) {
   }
 });
 
+APP.get("/joke", async function (req, res) {
+  try {
+    /**
+     * @type {string}
+     */
+    const JOKE_ID = req.query.id;
+    if (!/^\d+$/.test(JOKE_ID)) {
+      throw new Client_Error(
+        `The provided joke id ${JOKE_ID} did contain non numeric characters`,
+      );
+    }
+    const JOKE_DATA = await db_read_single_joke(JOKE_ID);
+    res.render("joke", { JOKE_DATA });
+  } catch (errer) {
+    if (error instanceof Client_Error) {
+      res.writeHead(400, error.message).end();
+    }
+    console.error(error);
+    res.write(500).end();
+  }
+});
+
+/*—————————————————————— Redirects ——————————————————————————————————————————*/
 APP.post(
   "/submit",
   express.urlencoded({ extended: false }),

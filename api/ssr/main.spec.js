@@ -70,7 +70,6 @@ test.describe("On route /submit", function () {
       form: SINGLE_SUBMISSION,
     });
     // THEN
-    console.debug("Before:" + RESPONSE.url());
     expect(RESPONSE.url()).toMatch(/\/joke\?id=\d+/);
   });
 
