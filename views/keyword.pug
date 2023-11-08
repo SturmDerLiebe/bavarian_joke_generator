@@ -1,7 +1,8 @@
 extends layout.pug
+include mixins/joke_card.pug
 
 block title
-    title #{KEYWORD} jokes
+    title Bavarian #{KEYWORD} jokes
 
 block style
     link(rel="stylesheet" href="keyword/styles.css")
@@ -12,10 +13,3 @@ block main
         +joke_card(joke.id, joke.content, joke.explanation, joke.submitted_by)
         unless (index === JOKE_DATA.length-1)
             hr
-
-mixin joke_card(id, content, explanation, submitted_by)
-    figure(id=id)
-        p= content
-        hr
-        p= explanation
-        figcaption submitted by #{submitted_by}
