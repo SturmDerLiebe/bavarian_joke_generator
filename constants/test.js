@@ -9,15 +9,23 @@ const BASE_JOKE = {
 };
 
 const KEYWORDS = ["Dummy1", "Dummy2", "Dummy3"];
+
+/**
+ * @type {import("../types/Joke").Joke_Submission}
+ */
 const CREATE_ARGS_BYUSER = {
   ...BASE_JOKE,
   keywords: KEYWORDS,
-  submitted_by: 1,
+  submitted_by: "1",
 };
+
+/**
+ * @type {import("../types/Joke").Joke_Submission}
+ */
 const CREATE_ARGS_ANONYMOUS = {
   ...BASE_JOKE,
   keywords: KEYWORDS,
-  submitted_by: null,
+  submitted_by: "",
 };
 
 const EXISTING_KEYWORD = KEYWORDS[0];
