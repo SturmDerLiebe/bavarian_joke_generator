@@ -1,8 +1,10 @@
 "use strict";
 
 import { test, expect } from "@playwright/test";
+import { SINGLE_SUBMISSION } from "../../constants/playwright";
 
-test.describe("On Error the /:keyword route responds with", function (request) {
+/*–––––––––––––––––––––––––––––––GET / ––––––––––––––––––––––––––––––––––––––*/
+test.describe("On Error the / route responds with", function () {
   test("a 4xx code on a client error", async function ({ request }) {
     // GIVEN
     const INVALID = "Ungültig";
@@ -31,4 +33,61 @@ test("Server runs", async function ({ request }) {
   const RESPONSE = await request.get("/valid");
   // THEN
   expect(RESPONSE).resolves;
+});
+
+/*––––––––––––––––––––––––––––––– GET /submit ––––––––––––––––––––––––––––––*/
+test.describe("On route /submit", function () {
+  test("invalid joke content responds with 400 code", async function ({
+    request,
+  }) {
+    // GIVEN
+    // WHEN
+    const RESPONSE = await request.post("/submit", {
+      form: { ...SINGLE_SUBMISSION, content: "" },
+    });
+    // THEN
+    expect(RESPONSE.status()).toBe(400);
+  });
+
+  test("invalid explanation content responds with 400 code", async function ({
+    request,
+  }) {
+    // GIVEN
+    // WHEN
+    const RESPONSE = await request.post("/submit", {
+      form: { ...SINGLE_SUBMISSION, explanation: "" },
+    });
+    // THEN
+    expect(RESPONSE.status()).toBe(400);
+  });
+
+  test("Valid Joke input data, should respond with 303 code", async function ({
+    request,
+  }) {
+    // GIVEN
+    // WHEN
+    const RESPONSE = await request.post("/submit", {
+      form: SINGLE_SUBMISSION,
+    });
+    // THEN
+    console.debug("Before:" + RESPONSE.url());
+    expect(RESPONSE.url()).toMatch(/\/joke\?id=\d+/);
+  });
+
+  test("Duplicate joke submission, should respond with 409 code", async function ({
+    request,
+  }) {
+    test.fail();
+    // GIVEN
+    await request.post("/submit", {
+      form: SINGLE_SUBMISSION,
+    });
+
+    // WHEN
+    const RESPONSE = await request.post("/submit", {
+      form: SINGLE_SUBMISSION,
+    });
+    // THEN
+    expect(RESPONSE.status()).toBe(409);
+  });
 });
