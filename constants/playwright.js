@@ -2,36 +2,47 @@
 
 const VALID_KEYWORD = "Dog";
 const LISTED_KEYWORD = VALID_KEYWORD;
-const SINGLE_SUBMISSION = get_joke_times(1)[0];
-const DUBLICATE_JOKE_SUBMISSIONS = get_joke_times(3);
-const DISTINC_JOKE_SUBMISSIONS = get_joke_times(3, false);
 const UNLISTED_KEYWORD = "Unlisted";
-
 /**
- * @returns {import("../types/Joke").User_Submission[]}
+ * This represents an unprocessed request directly from the user.
+ * @type {import("../types/Joke").User_Submission}
  */
+const SINGLE_SUBMISSION = {
+  content: "Des is a Hund!",
+  explanation: "They are like a dog!",
+  submitted_by: "",
+  keywords: "Dog, Cat",
+};
+/**
+ * This represents a processed request with distinct content.
+ * @type {import("../types/Joke").Joke_Submission[]}
+ */
+const DISTINCT_CREATE_ARGS = get_joke_times(3, false);
+/**
+ * This represents a processed request with duplicate content.
+ * @type {import("../types/Joke").Joke_Submission[]}
+ */
+const DUPLICATE_CREATE_ARGS = get_joke_times(3);
+
 function get_joke_times(n, duplicates = true) {
   let jokes = Array(n).fill({
-    content: "Des is a Hund!",
-    explanation: "They are like a dog!",
-    submitted_by: "",
-    keywords: "Dog, Cat",
+    ...SINGLE_SUBMISSION,
+    keywords: [LISTED_KEYWORD, "Cat"],
   });
   if (duplicates) {
     return jokes;
   }
   // Return joke array with distinct contents
-  jokes.forEach(function (joke_object) {
-    return (joke_object.content = joke_object.content + "a");
-  });
-  return jokes;
+  return (jokes = jokes.map(function (joke_object, index) {
+    return { ...joke_object, content: String(index) };
+  }));
 }
 
 export {
   VALID_KEYWORD,
   LISTED_KEYWORD,
   SINGLE_SUBMISSION,
-  DUBLICATE_JOKE_SUBMISSIONS,
-  DISTINC_JOKE_SUBMISSIONS,
+  DISTINCT_CREATE_ARGS,
+  DUPLICATE_CREATE_ARGS,
   UNLISTED_KEYWORD,
 };
