@@ -11,6 +11,7 @@
     "docker-dev": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development up -V --build",
     "docker-test": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.test up -V --build",
     "docker-down": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development down -v",
+    "docker-kill": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development kill",
     "playwright": "NODE_ENV=test playwright test --project",
     "jest": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=environment/.env.test jest --setupFiles=dotenv/config --detectOpenHandles --selectProjects",
     "format": "prettier . --write"
