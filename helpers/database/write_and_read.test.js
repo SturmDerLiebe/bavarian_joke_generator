@@ -12,10 +12,9 @@ import {
   EXISTING_KEYWORD,
   ANONYMOUS_JOKE,
   USER_JOKE,
-  INSERT_OPTIONS,
-  READ_OPTIONS,
   BASE_JOKE,
 } from "../../constants/test.js";
+import { INSERT_OPTIONS, READ_OPTIONS } from "../../constants/connections.js";
 
 beforeEach(async function () {
   await delete_all_jokes_and_keywords();
@@ -24,10 +23,8 @@ beforeEach(async function () {
 describe("A joke is read correctly from the database, when it is written by", function () {
   test("an anonymous submitter", async function () {
     // GIVEN
-    await Promise.all([
-      db_create_joke(CREATE_ARGS_ANONYMOUS, INSERT_OPTIONS),
-      db_create_joke(CREATE_ARGS_ANONYMOUS, INSERT_OPTIONS),
-    ]);
+    await db_create_joke(CREATE_ARGS_ANONYMOUS, INSERT_OPTIONS);
+    await db_create_joke(CREATE_ARGS_ANONYMOUS, INSERT_OPTIONS);
 
     // WHEN
     const JOKE_DATA = await db_read_joke(EXISTING_KEYWORD, READ_OPTIONS);
@@ -41,10 +38,8 @@ describe("A joke is read correctly from the database, when it is written by", fu
   // Expected to fail until users are implemented
   test.failing("a registered user", async function () {
     // GIVEN
-    await Promise.all([
-      db_create_joke(CREATE_ARGS_BYUSER, INSERT_OPTIONS),
-      db_create_joke(CREATE_ARGS_BYUSER, INSERT_OPTIONS),
-    ]);
+    await db_create_joke(CREATE_ARGS_BYUSER, INSERT_OPTIONS);
+    await db_create_joke(CREATE_ARGS_BYUSER, INSERT_OPTIONS);
 
     // WHEN
     const JOKE_DATA = await db_read_joke(EXISTING_KEYWORD, READ_OPTIONS);
