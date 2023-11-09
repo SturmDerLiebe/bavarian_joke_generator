@@ -5,7 +5,7 @@ GRANT SELECT ON bavarian_jokes.joke TO reader;
 GRANT SELECT ON bavarian_jokes.jk_pair TO reader;
 GRANT SELECT ON bavarian_jokes.keyword TO reader;
 GRANT SELECT ON bavarian_jokes.user TO reader;
-GRANT UPDATE (times_searched) ON bavarrian_jokes.keyword TO reader;
+GRANT UPDATE (times_searched) ON bavarian_jokes.keyword TO reader;
 
 -- SUBMITTER:
 CREATE USER IF NOT EXISTS submitter IDENTIFIED BY 'submitterPW';
