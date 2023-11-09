@@ -25,3 +25,4 @@ async function delete_all_jokes_and_keywords() {
 }
 
 export default delete_all_jokes_and_keywords;
+export { delete_all_jokes_and_keywords };
