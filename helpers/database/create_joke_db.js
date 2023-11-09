@@ -63,7 +63,7 @@ async function db_create_joke(
  * Executes multiple queries on a connection and returns all ongoing queries in an array.
  * @param {mysql.Connection} connection - The connection to execute the queries on.
  * @param {QP_Pair[]} queries - An array of queries to be executed.
- * @returns {Promise<[import("mysql2").ResultSetHeader, import("mysql2").FieldPacket[]]>[]}
+ * @returns {Promise<[import("mysql2").ResultSetHeader[], import("mysql2").FieldPacket[]]>[]}
  */
 function execute_query(connection, queries) {
   return queries.map(function (query) {
@@ -91,3 +91,4 @@ function repeat_keyword_INSERT(keywords) {
 }
 
 export default db_create_joke;
+export { db_create_joke as db_insert_joke };
