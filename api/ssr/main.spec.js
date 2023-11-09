@@ -1,9 +1,15 @@
 "use strict";
 
 import { test, expect } from "@playwright/test";
-import { SINGLE_SUBMISSION } from "../../constants/playwright";
+import {
+  DUPLICATE_CREATE_ARGS,
+  SINGLE_SUBMISSION,
+} from "../../constants/playwright";
+import { afterEach } from "node:test";
+import delete_all_jokes_and_keywords from "../../helpers/test/delete_jokes";
+import { db_insert_joke } from "../../helpers/database/create_joke_db";
 
-/*–––––––––––––––––––––––––––––––GET / ––––––––––––––––––––––––––––––––––––––*/
+/*–––––––––––––––––––––––––––––––GET /?keyword ––––––––––––––––––––––––––––––––––––––*/
 test.describe("On Error the / route responds with", function () {
   test("a 4xx code on a client error", async function ({ request }) {
     // GIVEN
@@ -14,29 +20,31 @@ test.describe("On Error the / route responds with", function () {
     expect(RESPONSE.status()).toBeWithinRange(400, 499);
   });
 });
-// Has to live outside of previous describe block due tue .fail() bug:
-test.describe("Expected to fail:", function () {
-  test.fail("a 5xx code on a server error", async function ({ request }) {
-    // GIVEN
-    const VALID = "Test";
-    // This is expected to fail when the server is not running
-    // WHEN
-    const RESPONSE = await request.get(`/${VALID}`);
-    // THEN
-    expect(RESPONSE.status()).toBeWithinRange(500, 599);
-  });
+test("a 5xx code on a server error", async function ({ request }) {
+  test.fail();
+  // GIVEN
+  const VALID = "Test";
+  // This is expected to fail when the server is not running
+  // WHEN
+  const RESPONSE = await request.get(`/${VALID}`);
+  // THEN
+  expect(RESPONSE.status()).toBeWithinRange(500, 599);
 });
 
 test("Server runs", async function ({ request }) {
   // GIVEN
   // WHEN
-  const RESPONSE = await request.get("/valid");
+  const RESPONSE = await request.get("/");
   // THEN
   expect(RESPONSE).resolves;
 });
 
-/*––––––––––––––––––––––––––––––– GET /submit ––––––––––––––––––––––––––––––*/
+/*––––––––––––––––––––––––––––––– POST /submit ––––––––––––––––––––––––––––––*/
 test.describe("On route /submit", function () {
+  test.afterEach(async () => {
+    await delete_all_jokes_and_keywords();
+  });
+
   test("invalid joke content responds with 400 code", async function ({
     request,
   }) {
@@ -61,7 +69,7 @@ test.describe("On route /submit", function () {
     expect(RESPONSE.status()).toBe(400);
   });
 
-  test("Valid Joke input data, should respond with 303 code", async function ({
+  test("Valid joke input data, should respond with correct redirect", async function ({
     request,
   }) {
     // GIVEN
@@ -78,9 +86,7 @@ test.describe("On route /submit", function () {
   }) {
     test.fail();
     // GIVEN
-    await request.post("/submit", {
-      form: SINGLE_SUBMISSION,
-    });
+    await db_insert_joke(DUPLICATE_CREATE_ARGS[0]);
 
     // WHEN
     const RESPONSE = await request.post("/submit", {
