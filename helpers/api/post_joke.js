@@ -6,8 +6,8 @@
  * @returns {boolean}
  */
 function is_valid_joke_data({ content, explanation, keywords, submitted_by }) {
-  const CONTENT_REGEX = /^(?:[A-Za-zöüäÖÜÄ0-9.,:;'ʼ&quot;„‟–—\-?!]+\s?)+$/;
-  const EXPLANATION_REGEX = /^(?:[A-Za-z0-9.,:;'ʼ&quot;„‟–—\-?!]+\s?)+$/;
+  const CONTENT_REGEX = /^(?:[A-Za-zöüäÖÜÄ0-9\.,:;'ʼ";„‟–—\-\?!]+\s?)+$/;
+  const EXPLANATION_REGEX = /^(?:[A-Za-z0-9\.,:;'ʼ";„‟–—\-\?!]+\s?)+$/;
   const KEYWORDS_REGEX = /^[A-Za-z]+(?:,\s[A-Za-z]+)*$/;
   const USER_REGEX = /^[A-Za-z0-9_\-–—]*$/;
   return (
