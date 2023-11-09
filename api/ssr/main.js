@@ -1,7 +1,9 @@
 "use strict";
 
 import express from "express";
-import db_read_joke from "../../helpers/database/read_joke_db.js";
+import db_read_joke, {
+  db_read_single_joke,
+} from "../../helpers/database/read_joke_db.js";
 import { is_valid_keyword } from "../../helpers/api/get_joke.js";
 import {
   Client_Error,
@@ -58,13 +60,21 @@ APP.get("/joke", async function (req, res) {
       );
     }
     const JOKE_DATA = await db_read_single_joke(JOKE_ID);
-    res.render("joke", { JOKE_DATA });
-  } catch (errer) {
-    if (error instanceof Client_Error) {
-      res.writeHead(400, error.message).end();
+    // Data Validation:
+    if (!JOKE_DATA) {
+      throw new Not_Found_Error(`The Joke of id ${JOKE_ID} does not exist`);
     }
-    console.error(error);
-    res.write(500).end();
+    res.render("joke", { JOKE_ID, JOKE_DATA });
+    /*——————————————————————— Error Codes ——————————————————————————————————*/
+  } catch (error) {
+    if (error instanceof Not_Found_Error) {
+      res.writeHead(404, error.message).end();
+    } else if (error instanceof Client_Error) {
+      res.writeHead(400, error.message).end();
+    } else {
+      console.error(error);
+      res.writeHead(500).end();
+    }
   }
 });
 
@@ -97,7 +107,7 @@ APP.post(
         keywords,
       });
       // Response
-      res.redirect(303, `../joke?id=${NEW_ID}`);
+      res.redirect(303, `./joke?id=${NEW_ID}`);
     } catch (error) {
       // Error Responses
       if (error instanceof Duplicate_Joke_Error) {
