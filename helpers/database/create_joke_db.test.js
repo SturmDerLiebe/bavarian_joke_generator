@@ -7,15 +7,13 @@ import db_create_joke from "./create_joke_db.js";
 import {
   CREATE_ARGS_ANONYMOUS,
   CREATE_ARGS_BYUSER,
-  INSERT_OPTIONS,
 } from "../../constants/test.js";
+import { INSERT_OPTIONS } from "../../constants/connections.js";
 
 //  Integration
 describe("db_create_joke executes properly & returns the inserted id for Jokes submitted", function () {
   test.failing("by a user", async function () {
     // GIVEN
-    // CREATE_ARGS_BYUSER
-
     // WHEN
     const RESULT = await db_create_joke(CREATE_ARGS_BYUSER, INSERT_OPTIONS);
 

@@ -6,11 +6,8 @@ import mysql from "mysql2/promise";
 import db_read_joke, { db_read_single_joke } from "./read_joke_db.js";
 import delete_all_jokes_and_keywords from "../test/delete_jokes.js";
 // Constants
-import {
-  EXISTING_KEYWORD,
-  NONEXISTING_KEYWORD,
-  READ_OPTIONS,
-} from "../../constants/test.js";
+import { EXISTING_KEYWORD, NONEXISTING_KEYWORD } from "../../constants/test.js";
+import { READ_OPTIONS } from "../../constants/connections.js";
 
 beforeAll(async function () {
   await delete_all_jokes_and_keywords();
