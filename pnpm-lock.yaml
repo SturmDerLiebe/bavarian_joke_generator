@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  "@simplewebauthn/browser":
+    specifier: ^8.3.4
+    version: 8.3.4
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
@@ -1080,6 +1083,22 @@ packages:
     dependencies:
       playwright: 1.39.0
     dev: true
+
+  /@simplewebauthn/browser@8.3.4:
+    resolution:
+      {
+        integrity: sha512-rO0hZ0ESD28bZl6Qe8k7RUuYvDLbsS6oPezkMMTtZ5vC80U07j4qBELKBzojDD6BsdL3dIJ9SExVp8E7pqQ5fA==,
+      }
+    dependencies:
+      "@simplewebauthn/typescript-types": 8.3.4
+    dev: false
+
+  /@simplewebauthn/typescript-types@8.3.4:
+    resolution:
+      {
+        integrity: sha512-38xtca0OqfRVNloKBrFB5LEM6PN5vzFbJG6rAutPVrtGHFYxPdiV3btYWq0eAZAZmP+dqFPYJxJWeJrGfmYHng==,
+      }
+    dev: false
 
   /@sinclair/typebox@0.27.8:
     resolution:
