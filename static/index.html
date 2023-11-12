@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bavarian Jokes Generator</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" type="module"></script>
   </head>
   <body>
     <header>
       <h1>Griasd eich zum Bavarian Joke Generator</h1>
     </header>
     <main>
-      <article>
+      <section>
         <h2>Generate a Joke</h2>
         <!-- Joke Generator: -->
         <form
@@ -31,6 +32,7 @@
               pattern="^[A-Za-z]+$"
               minlength="2"
               aria-describedby="keyword_hint"
+              spellcheck="true"
               required
           /></label>
           <button type="submit" data-testid="gen-btn">Generate Joke</button>
@@ -47,7 +49,8 @@
 - For Content only use German letters.
 - For Explanation only use English letters.
 - Use a format like "Mouse, Dog, Cat" for multiple Keywords.
-- Leave the Username empty for an anonymous submission'
+- Leave the Username empty for an anonymous submission
+- For Username only english letters, numbers and the symbols "- _" are allowed.'
         >
           <h3>Your Bavarian joke</h3>
           <label for="content">Content:</label>
@@ -62,6 +65,7 @@
             minlength="10"
             maxlength="1000"
             aria-describedby="content_hint"
+            spellcheck="false"
             required
           ></textarea>
           <h3>Explain or translate your joke in English</h3>
@@ -77,6 +81,7 @@
             minlength="10"
             maxlength="1000"
             aria-describedby="explanation_hint"
+            spellcheck="true"
             required
           ></textarea>
           <h3>Which key words would you associate with your joke?</h3>
@@ -91,6 +96,7 @@
               placeholder="e.g. Dog"
               minlength="2"
               aria-describedby="keywords_hint"
+              spellcheck="true"
               required
           /></label>
           <label for="submitter"
@@ -99,9 +105,10 @@
               id="submitter"
               type="text"
               name="submitted_by"
-              pattern="^[A-Za-z0-9_\-–—]*$"
+              pattern="^[A-Za-z0-9_\-]*$"
               placeholder="Leave empty for an anonymous submission"
-              aria-describedby="submitter_hint"
+              aria-describedby="submitter_hint username_hint"
+              spellcheck="false"
             />
           </label>
           <button type="submit">Submit Joke</button>
@@ -126,11 +133,47 @@
               <b>Keywords</b>.
             </li>
             <li id="submitter_hint" aria-role="toooltip">
-              Leave the <b>Username</b> empty for an anonymous submission
+              Leave the <b>Username</b> empty for an anonymous submission.
+            </li>
+            <li id="username_hint" aria-role="tooltip">
+              For Username only english letters, numbers and the symbols
+              <kbd><kbd>-</kbd> <kbd>_</kbd></kbd> are
+              allowed.
             </li>
           </ul>
         </footer>
-      </article>
+      </section>
+      <!-- ————————————— Login & Submit——————————————————————————————————— -->
+      <section>
+        <h2>Create your own profile</h2>
+        <p id="register-message">
+          If you want to have your username shown next to your submitted joke,
+          <strong>register your new profile here</strong>:
+          <button id="start-register">Start Registration</button>
+        </p>
+        <dialog id="registration-modal">
+          <form
+            method="dialog"
+            title='Only english letters, numbers and the symbols "- _" are allowed.'
+          >
+            <label for="username">
+              Choose a username:
+              <input
+                id="username"
+                type="text"
+                pattern="^[A-Za-z0-9_\-–—]*$"
+                size="40"
+                placeholder="e.g. Mira"
+                aria-describedby="username_hint"
+                spellcheck="false"
+                autofocus
+              />
+            </label>
+            <button id="register" type="submit">Register</button>
+            <button id="close" >Close</button>
+          </form>
+        </dialog>
+      </section>
     </main>
   </body>
 </html>
