@@ -33,7 +33,7 @@ async function db_read_joke(keyword, connection_options) {
       FROM joke AS j
       INNER JOIN jk_pair AS jkp ON j.id = jkp.joke_id
       INNER JOIN keyword AS k ON jkp.keyword_id = k.id
-      LEFT JOIN user AS u ON j.submitted_by = u.id
+      LEFT JOIN users AS u ON j.submitted_by = u.id
       WHERE k.title = ?;
 
       `,
@@ -67,7 +67,7 @@ async function db_read_single_joke(id, connection_options) {
               'Anonymous'
           ) AS submitted_by
       FROM joke AS j
-      LEFT JOIN user AS u ON j.submitted_by = u.id
+      LEFT JOIN users AS u ON j.submitted_by = u.id
       WHERE j.id = ?;
       `,
       [id],
