@@ -6,8 +6,8 @@ const REGISTER_MSG = document.getElementById("register-message");
 const REGISTER_BTN = document.getElementById("start-register");
 
 /**
-  * @type {HTMLDialogElement}
-  */
+ * @type {HTMLDialogElement}
+ */
 const MODAL = document.getElementById("registration-modal");
 
 REGISTER_BTN.addEventListener("click", function show_modal() {
@@ -15,8 +15,8 @@ REGISTER_BTN.addEventListener("click", function show_modal() {
 });
 /* —————————————————————— Inside Modal —————————————————————————————————————*/
 /**
-  * @type{HTMLInputElement}
-  */
+ * @type{HTMLInputElement}
+ */
 const USERNAME_INPUT = document.getElementById("username");
 const SUBMIT_BTN = document.getElementById("register");
 
