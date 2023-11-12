@@ -1,3 +1,6 @@
 **/*.test.js
 **/*.spec.js
 **/test/
+/constants/test.js
+/constants/playwright.js
+/constants/connections.js
