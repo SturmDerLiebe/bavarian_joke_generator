@@ -7,13 +7,12 @@ import db_read_joke, {
 import { is_valid_keyword } from "../../helpers/api/get_joke.js";
 import {
   Client_Error,
-  Duplicate_Joke_Error,
+  Duplicate_Error,
   Not_Found_Error,
 } from "../../library/Errors.js";
 import { SSR_PORT } from "../../constants/api.js";
 import db_create_joke from "../../helpers/database/create_joke_db.js";
 import { is_valid_joke_data } from "../../helpers/api/post_joke.js";
-import { error } from "console";
 
 const APP = express();
 /*——————————————————————————————— SSR ———————————————————————————————————————*/
@@ -22,7 +21,7 @@ APP.set("view engine", "pug");
 APP.get("/", async function (req, res) {
   try {
     const KEYWORD = req.query.keyword;
-    // ~Validation
+    // Validation
     if (!is_valid_keyword(KEYWORD)) {
       throw new Client_Error(
         `Your keyword "${KEYWORD}" did contain non english letters, numbers or other symbols`,
@@ -110,7 +109,7 @@ APP.post(
       res.redirect(303, `./joke?id=${NEW_ID}`);
     } catch (error) {
       // Error Responses
-      if (error instanceof Duplicate_Joke_Error) {
+      if (error instanceof Duplicate_Error) {
         res.writeHead(409, error.message).end();
       } else if (error instanceof Client_Error) {
         res.writeHead(400, error.message).end();
