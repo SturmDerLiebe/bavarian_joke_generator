@@ -30,12 +30,12 @@ scale 2
 
 entity joke
 entity keyword
-entity user
+entity users
 entity authenticator
 
 joke }|--|{ keyword : is associated with >
-joke }o--o| user : can be submitted by >
-user ||--|{ authenticator : loggs in via >
+joke }o--o| users : can be submitted by >
+users ||--|{ authenticator : loggs in via >
 
 @enduml
 
@@ -69,12 +69,12 @@ entity Keyword  {
     searched_times: BIGINT UNSIGNED DEFAULT 0
 }
 
-entity user {
+entity users {
     ' The extra id is necessary for using simplewebauthn:
     * id: SERIAL <<PK>>
     --
     * username VARCHAR(30) UNIQUE <<SK>>
-    current_challange: TINYTEXT
+    current_challange: TEXT
 }
 
 entity authenticator {
@@ -83,16 +83,16 @@ entity authenticator {
     * credentialID: TEXT
     * credentialPublicKey: BLOB
     * counter: BIGINT UNSIGNED
-    * credentialDeviceType: ENUM('singleDevice', 'multiDevice')
+    * credentialDeviceType: VARCHAR(32)
     * credentialBackedUp: BOOL
-    transports: SET('ble', 'cable', 'hybrid', 'internal', 'nfc', 'smart-card', 'usb')
+    transports: VARCHAR(255) DEFAULT NULL
     * user_id: BIGINT UNSIGNED <<FK>>
 }
 
 joke ||--|{ jk_pair : has >
 jk_pair }|--|| Keyword : is part of <
-joke }|--o| user : can submitted by >
-user ||--|{ authenticator : logs in via > 
+joke }o--o| users : can submitted by >
+users ||--|{ authenticator : logs in via > 
 
 legend
     Attributes with a • (list marker) have the NOT NULL constraint
