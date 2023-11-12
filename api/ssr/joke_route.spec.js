@@ -9,8 +9,8 @@ test.afterEach(async () => {
 });
 
 /*––––––––––––––––––––––––––––––– GET /joke?id ––––––––––––––––––––––––––––––––––––––*/
-test.describe("A user can see one joke by requesting it with", function() {
-  test("an existing id. They should receive a 200 code.", async function({
+test.describe("A user can see one joke by requesting it with", function () {
+  test("an existing id. They should receive a 200 code.", async function ({
     request,
   }) {
     // GIVEN
@@ -23,7 +23,7 @@ test.describe("A user can see one joke by requesting it with", function() {
 
   test.fail(
     "a non-existent id. They should receive a 404 code.",
-    async function({ request }) {
+    async function ({ request }) {
       // GIVEN
       // WHEN
       const RESPONSE = await request.get(`/joke?id=1`);
