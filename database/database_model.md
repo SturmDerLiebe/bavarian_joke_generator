@@ -74,7 +74,7 @@ entity users {
     * id: SERIAL <<PK>>
     --
     * username VARCHAR(30) UNIQUE <<SK>>
-    current_challange: TEXT
+    current_challange: TEXT DEFAULT NULL
 }
 
 entity authenticator {

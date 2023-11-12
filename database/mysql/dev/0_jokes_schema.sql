@@ -6,7 +6,7 @@ CREATE TABLE
 IF NOT EXISTS user (
     id SERIAL,
     username VARCHAR(30) NOT NULL,
-    currentChallange TEXT, 
+    currentChallange TEXT DEFAULT NULL, 
     PRIMARY KEY (id),
     UNIQUE (username)
 );
