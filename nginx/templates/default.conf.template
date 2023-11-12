@@ -16,10 +16,6 @@ server {
         internal;
     }
 
-    location ~ .js$ {
-        root /usr/share/nginx/html;
-    }
-
     location ^~ /public/ {
         root /usr/share/nginx;
     }
@@ -30,5 +26,9 @@ server {
         proxy_http_version 1.1;
         proxy_set_header   "Connection" "";
         proxy_intercept_errors on;
+    }
+
+    location ~ \.(?:js|.css)$ {
+        root /usr/share/nginx/html;
     }
 }
