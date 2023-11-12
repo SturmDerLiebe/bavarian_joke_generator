@@ -1,6 +1,6 @@
 "use strict";
-import dotenv from "dotenv";
-dotenv.config();
+//import dotenv from "dotenv";
+//dotenv.config();
 
 /**
  * The user to access the database
@@ -11,6 +11,7 @@ const USERS = {
   /** User with SELECT privileges only */
   reader: "reader",
   submitter: "submitter",
+  authenticator: "authenticator",
   loggeed_in_user: "logged_in_user",
 };
 
@@ -34,7 +35,7 @@ const DATABASE_NAME = "bavarian_jokes";
 
 /**
  * Get the options object to connect to the mysql db with the correct user.
- * @param {"create"|"read"} action the action to be executed with your connection.
+ * @param {"create"|"read"| "authenticate"} action the action to be executed with your connection.
  * @returns {Connection_Options} mysql_connection_options - Options object to be passed to mysql.createConnection().
  * @throws {Error} If the {@link action} argument has no user for it yet.
  */
@@ -46,6 +47,9 @@ function get_connection_options(action) {
       break;
     case "read":
       user = USERS.reader;
+      break;
+    case "authenticate":
+      user = USERS.authenticator;
       break;
     default:
       throw new Error(`The action ${action} is not defined yet`);
