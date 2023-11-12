@@ -1,6 +1,6 @@
 "use strict";
 
-import { USERNAME_PATTERN } from "../../RegEx/username";
+import { USERNAME_PATTERN } from "../../RegEx/username.js";
 
 /**
  * Checks if the user submitted data is valid.
