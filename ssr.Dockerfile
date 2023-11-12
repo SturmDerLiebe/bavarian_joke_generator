@@ -11,7 +11,8 @@ RUN pnpm fetch --prod
 RUN pnpm install -r --offline --prod
 USER node
 COPY --chown=node:node api/ api/
-COPY --chown=node:node constants/database.js constants/
+COPY --chown=node:node RegEx/ RegEx/
+COPY --chown=node:node constants/db.js constants/
 COPY --chown=node:node constants/api.js constants/
 COPY --chown=node:node helpers/api/ helpers/api/
 COPY --chown=node:node helpers/database/ helpers/database/
