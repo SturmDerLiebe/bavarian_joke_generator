@@ -143,3 +143,12 @@ form {
   align-items: center;
   justify-content: space-evenly;
 }
+
+hr {
+  margin: 1em;
+  border-color: whitesmoke;
+  border-style: solid;
+  border-radius: 1em;
+  border-width: 0.25em;
+  box-shadow: 0 0 0.1em;
+}

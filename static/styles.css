@@ -17,15 +17,6 @@ kbd:only-of-type {
   min-height: 45em;
 }
 
-hr {
-  margin: 1em;
-  border-color: whitesmoke;
-  border-style: solid;
-  border-radius: 1em;
-  border-width: 0.25em;
-  box-shadow: 0 0 0.1em;
-}
-
 ul {
   list-style-position: inside;
 }
