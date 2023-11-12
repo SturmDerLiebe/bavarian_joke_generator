@@ -3,7 +3,7 @@
 import mysql from "mysql2/promise";
 // Constants:
 import { get_connection_options } from "../../constants/db.js";
-import { Duplicate_Joke_Error } from "../../library/Errors.js";
+import { Duplicate_Error } from "../../library/Errors.js";
 
 /**
  * Writes the joke to the database.
@@ -46,7 +46,7 @@ async function db_create_joke(
     await CONNECTION.rollback();
     if (error.errno === 1062) {
       // https://dev.mysql.com/doc/mysql-errors/8.0/en/server-error-reference.html#error_er_dup_entry
-      throw new Duplicate_Joke_Error("The Joke already exists in our database");
+      throw new Duplicate_Error("The Joke already exists in our database");
     }
     throw new Error(error);
   } finally {
