@@ -1,14 +1,14 @@
 # Database Model
 ## Bavarian joke Simulator
-### Minimum Features:
+### Implemented Use Cases:
 - A user can search for *any* Bavarian jokes by submitting *one* English keyword
 - A user can submit a Bavarian joke alongside _at least one_, related keywords
 - A Bavarian joke is accompanied by its required explanation in English
 - A user can submit a joke anonymously without logging in
     - These jokes can then only be edited & deleted by the site admin
-### Additional Features:
-- A user can sign up before submitting a joke
-- A user can log in to submit and view, edit & delete their submissions
+### Use Cases to be implemented:
+- A user can sign up
+- A user can log in to submit jokes and view, edit & delete their submissions
     - On joke deletion, the joke-keyword pair gets deleted as well
     - Changing the assoiated keyword adds a new keyword if it does not exist yet and associates the joke with the new keyword(s)
 - A user can sign up & log in  via webauthn (without a password)
@@ -34,7 +34,7 @@ entity user
 entity authenticator
 
 joke }|--|{ keyword : is associated with >
-joke }|--o| user : can be submitted by >
+joke }o--o| user : can be submitted by >
 user ||--|{ authenticator : loggs in via >
 
 @enduml
