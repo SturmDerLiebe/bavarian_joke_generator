@@ -1,6 +1,7 @@
 import { expect as baseExpect, defineConfig } from "@playwright/test";
 import dotenv from "dotenv";
 import { SSR_PORT } from "./constants/api";
+import { AUTH_PORT } from "./constants/auth";
 
 dotenv.config({
   path: "./environment/.env.test",
@@ -70,6 +71,13 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    {
+      testDir: "./api/auth",
+      name: "auth",
+      use: {
+        baseURL: `http://127.0.0.1:${AUTH_PORT}`,
+      },
+    },
     {
       testDir: "./api/ssr",
       name: "ssr",
