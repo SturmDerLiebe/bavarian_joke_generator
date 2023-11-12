@@ -6,6 +6,7 @@ CREATE TABLE
 IF NOT EXISTS user (
     id SERIAL,
     username VARCHAR(30) NOT NULL,
+    currentChallange TEXT, 
     PRIMARY KEY (id),
     UNIQUE (username)
 );
@@ -16,19 +17,10 @@ IF NOT EXISTS authenticator (
     credentialid TEXT NOT NULL,
     credentialpublickey BLOB NOT NULL,
     counter BIGINT UNSIGNED NOT NULL,
-    credentialdevicetype ENUM('singleDevice', 'multiDevice') NOT NULL,
+    credentialdevicetype VARCHAR(32) NOT NULL,
     credentialbackedup BOOL NOT NULL,
     user_id BIGINT UNSIGNED NOT NULL,
-    transports
-    SET(
-        'ble',
-        'cable',
-        'hybrid',
-        'internal',
-        'nfc',
-        'smart-card',
-        'usb'
-    ) DEFAULT NULL,
+    transports VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user (
         id
