@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS bavarian_jokes;
 USE bavarian_jokes;
 
 CREATE TABLE
-IF NOT EXISTS user (
+IF NOT EXISTS users (
     id SERIAL,
     username VARCHAR(30) NOT NULL,
     currentChallange TEXT DEFAULT NULL, 
@@ -22,7 +22,7 @@ IF NOT EXISTS authenticator (
     user_id BIGINT UNSIGNED NOT NULL,
     transports VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user (
+    FOREIGN KEY (user_id) REFERENCES users (
         id
     ) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -36,7 +36,7 @@ IF NOT EXISTS joke (
     submitted_by BIGINT UNSIGNED DEFAULT NULL,
     PRIMARY KEY (id),
     -- UNIQUE (content_hash),
-    FOREIGN KEY (submitted_by) REFERENCES user (
+    FOREIGN KEY (submitted_by) REFERENCES users (
         id
     ) ON DELETE SET NULL ON UPDATE CASCADE
 );
