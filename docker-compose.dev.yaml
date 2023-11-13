@@ -35,6 +35,22 @@ services:
       - web
     env_file:
       - ./environment/.env.development
+  # ———————————————————— AUTHENTICATION ——————————————————————————————————————
+  joke_auth:
+    image: auth:latest
+    build:
+      context: ./
+      dockerfile: auth.Dockerfile
+    ports:
+      # Delete in production:
+      - "${AUTH_PORT}:${AUTH_PORT}"
+    expose:
+      - "${AUTH_PORT}"
+    networks:
+      - sql
+      - web
+    env_file:
+      - ./environment/.env.development
   # NGINX:
   joke_webserver:
     image: nginx:stable
