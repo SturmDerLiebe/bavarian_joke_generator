@@ -10,7 +10,7 @@ COPY pnpm-lock.yaml ./
 RUN pnpm fetch --prod
 RUN pnpm install -r --offline --prod
 USER node
-COPY --chown=node:node api/ api/
+COPY --chown=node:node api/ssr/ api/ssr/
 COPY --chown=node:node RegEx/ RegEx/
 COPY --chown=node:node constants/db.js constants/
 COPY --chown=node:node constants/api.js constants/
