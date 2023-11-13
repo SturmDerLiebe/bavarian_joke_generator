@@ -35,6 +35,9 @@ async function db_create_joke(
 
   try {
     await CONNECTION.beginTransaction();
+    /**
+     * The data of the first executed query and from that, only the Result Data.
+     */
     const [[JOKE_HEADER]] = await Promise.all(
       execute_query(CONNECTION, QUERIES),
     );
@@ -63,7 +66,7 @@ async function db_create_joke(
  * Executes multiple queries on a connection and returns all ongoing queries in an array.
  * @param {mysql.Connection} connection - The connection to execute the queries on.
  * @param {QP_Pair[]} queries - An array of queries to be executed.
- * @returns {Promise<[import("mysql2").ResultSetHeader[], import("mysql2").FieldPacket[]]>[]}
+ * @returns {import("../../types/Database.js").Mysql2_Insertion_Return_Data[]}
  */
 function execute_query(connection, queries) {
   return queries.map(function (query) {
