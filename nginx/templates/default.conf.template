@@ -28,6 +28,14 @@ server {
         proxy_intercept_errors on;
     }
 
+    location ^~ /auth/ {
+        # pass will exchange auth/ for /:
+        proxy_pass "http://${AUTH_HOST}:${AUTH_PORT}/";
+        proxy_http_version 1.1;
+        proxy_set_header   "Connection" "";
+        # No error pages -> Do not intercept errors
+    }
+
     location ~ \.(?:js|.css)$ {
         root /usr/share/nginx/html;
     }
