@@ -67,7 +67,7 @@ services:
     env_file:
       - ./environment/.env.development
     # Delete in production
-    command: [ nginx-debug, "-g", "daemon off;" ]
+    command: [nginx-debug, "-g", "daemon off;"]
 
 networks:
   sql:
