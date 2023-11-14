@@ -6,7 +6,7 @@ CREATE TABLE
 IF NOT EXISTS users (
     id SERIAL,
     username VARCHAR(30) NOT NULL,
-    currentChallange TEXT DEFAULT NULL, 
+    current_challange TEXT DEFAULT NULL, 
     PRIMARY KEY (id),
     UNIQUE (username)
 );
@@ -14,13 +14,13 @@ IF NOT EXISTS users (
 CREATE TABLE
 IF NOT EXISTS authenticator (
     id SERIAL,
-    credentialid TEXT NOT NULL,
-    credentialpublickey BLOB NOT NULL,
+    credential_id TEXT NOT NULL,
+    credential_public_key BLOB NOT NULL,
     counter BIGINT UNSIGNED NOT NULL,
-    credentialdevicetype VARCHAR(32) NOT NULL,
-    credentialbackedup BOOL NOT NULL,
-    user_id BIGINT UNSIGNED NOT NULL,
+    credential_device_type VARCHAR(32) NOT NULL,
+    credential_backed_up BOOL NOT NULL,
     transports VARCHAR(255) DEFAULT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (
         id
@@ -64,4 +64,3 @@ IF NOT EXISTS jk_pair (
         id
     ) ON DELETE CASCADE ON UPDATE CASCADE
 );
-

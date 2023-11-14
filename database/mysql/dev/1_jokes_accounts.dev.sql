@@ -17,7 +17,7 @@ GRANT SELECT, INSERT, UPDATE ON bavarian_jokes.keyword TO submitter;
 -- AUTHENTICATOR
 CREATE USER IF NOT EXISTS authenticator IDENTIFIED BY 'authenticatorPW';
 
-GRANT SELECT, INSERT, UPDATE (currentChallange) ON bavarian_jokes.users TO authenticator;
+GRANT SELECT, INSERT, UPDATE (current_challange) ON bavarian_jokes.users TO authenticator;
 
 -- LOGGED_IN_USER:
 CREATE USER IF NOT EXISTS logged_in_user IDENTIFIED BY 'logged_in_userPW';
