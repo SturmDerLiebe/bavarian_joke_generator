@@ -5,7 +5,7 @@ import { get_connection_options } from "../../../constants/db.js";
 
 /**
  * Updates the current challange of a user needed for authentication.
- * @param {string} user id
+ * @param {string} user_id
  * @param {string} new_challange
  * @param {import("mysql2").ConnectionOptions} [connection_options] - optional connection options
  * @throws {Error} If any connection error or similar happens.
