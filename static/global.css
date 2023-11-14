@@ -4,11 +4,11 @@
   src:
     local("Atkinson-Hyperlegible Regular"),
     local("Atkinson Hyperlegible-Regular"),
-    url("../assets/fonts/atkinson/WOFF2/Atkinson-Hyperlegible-Regular-102a.woff2")
+    url("/assets/fonts/atkinson/WOFF2/Atkinson-Hyperlegible-Regular-102a.woff2")
       format("woff2"),
-    url("../assets/fonts/atkinson/WOFF/Atkinson-Hyperlegible-Regular-102.woff")
+    url("/assets/fonts/atkinson/WOFF/Atkinson-Hyperlegible-Regular-102.woff")
       format("woff"),
-    url("../assets/fonts/atkinson/TTF/Atkinson-Hyperlegible-Regular-102.ttf")
+    url("/assets/fonts/atkinson/TTF/Atkinson-Hyperlegible-Regular-102.ttf")
       format("truetype");
 }
 
@@ -17,11 +17,11 @@
   src:
     local("Atkinson-Hyperlegible Bold"),
     local("Atkinson Hyperlegible-Bold"),
-    url("../assets/fonts/atkinson/WOFF2/Atkinson-Hyperlegible-Bold-102a.woff2")
+    url("/assets/fonts/atkinson/WOFF2/Atkinson-Hyperlegible-Bold-102a.woff2")
       format("woff2"),
-    url("../assets/fonts/atkinson/WOFF/Atkinson-Hyperlegible-Bold-102.woff")
+    url("/assets/fonts/atkinson/WOFF/Atkinson-Hyperlegible-Bold-102.woff")
       format("woff"),
-    url("../assets/fonts/atkinson/TTF/Atkinson-Hyperlegible-Bold-102.ttf")
+    url("/assets/fonts/atkinson/TTF/Atkinson-Hyperlegible-Bold-102.ttf")
       format("truetype");
   font-weight: bold;
 }
@@ -31,11 +31,11 @@
   src:
     local("Atkinson-Hyperlegible Italic"),
     local("Atkinson Hyperlegible-Italic"),
-    url("../assets/fonts/atkinson/WOFF2/Atkinson-Hyperlegible-Italic-102a.woff2")
+    url("/assets/fonts/atkinson/WOFF2/Atkinson-Hyperlegible-Italic-102a.woff2")
       format("woff2"),
-    url("../assets/fonts/atkinson/WOFF/Atkinson-Hyperlegible-Italic-102.woff")
+    url("/assets/fonts/atkinson/WOFF/Atkinson-Hyperlegible-Italic-102.woff")
       format("woff"),
-    url("../assets/fonts/atkinson/TTF/Atkinson-Hyperlegible-Italic-102.ttf")
+    url("/assets/fonts/atkinson/TTF/Atkinson-Hyperlegible-Italic-102.ttf")
       format("truetype");
   font-style: italic;
 }
@@ -45,11 +45,11 @@
   src:
     local("Atkinson-Hyperlegible BoldItalic"),
     local("Atkinson Hyperlegible-BoldItalic"),
-    url("../assets/fonts/atkinson/WOFF2/Atkinson-Hyperlegible-BoldItalic-102a.woff2")
+    url("/assets/fonts/atkinson/WOFF2/Atkinson-Hyperlegible-BoldItalic-102a.woff2")
       format("woff2"),
-    url("../assets/fonts/atkinson/WOFF/Atkinson-Hyperlegible-BoldItalic-102.woff")
+    url("/assets/fonts/atkinson/WOFF/Atkinson-Hyperlegible-BoldItalic-102.woff")
       format("woff"),
-    url("../assets/fonts/atkinson/TTF/Atkinson-Hyperlegible-BoldItalic-102.ttf")
+    url("/assets/fonts/atkinson/TTF/Atkinson-Hyperlegible-BoldItalic-102.ttf")
       format("truetype");
   font-weight: bold;
   font-style: italic;
@@ -60,7 +60,7 @@
   src:
     local("Bertholdr Mainzer Fraktur"),
     local("Bertholdr-Mainzer-Fraktur"),
-    url("../assets/fonts/Bertholdr-Mainzer-Fraktur.ttf") format("truetype");
+    url("/assets/fonts/Bertholdr-Mainzer-Fraktur.ttf") format("truetype");
 }
 
 /* CSS Presets: */
@@ -89,7 +89,7 @@ html {
 
 body::before {
   content: "";
-  background: url("../assets/bavarian_flag_repeatable.svg");
+  background: url("/assets/bavarian_flag_repeatable.svg");
   z-index: -1;
   position: fixed;
   rotate: -45deg;
