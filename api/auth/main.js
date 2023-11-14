@@ -16,6 +16,7 @@ import { is_valid_username } from "../../helpers/auth/get_auth_options.js";
 import { db_insert_user } from "../../helpers/database/user/db_insert.js";
 import { db_update_challange } from "../../helpers/database/user/db_update.js";
 import { db_select_challange } from "../../helpers/database/user/db_select.js";
+import { db_insert_authenticator } from "../../helpers/database/authenticator/db_insert.js";
 
 const APP = express();
 
@@ -140,6 +141,27 @@ APP.post(
           "There was an issue verifying your authentication",
         );
       }
+      /*—————————————————————— Saving Authenticator  ——————————————————————————————————*/
+      const { registrationInfo } = verification;
+      const {
+        credentialPublicKey,
+        credentialID,
+        counter,
+        credentialDeviceType,
+        credentialBackedUp,
+        transports,
+      } = registrationInfo;
+
+      const newAuthenticator = {
+        credentialID,
+        credentialPublicKey,
+        counter,
+        credentialDeviceType,
+        credentialBackedUp,
+        transports,
+      };
+
+      await db_insert_authenticator(USER_ID, newAuthenticator);
       /*—————————————————————— Response ——————————————————————————————————*/
       response
         // TODO: set auth cookie headers
