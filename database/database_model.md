@@ -80,11 +80,11 @@ entity users {
 entity authenticator {
     * id: SERIAL <<PK>>
     --
-    * credentialID: TEXT
-    * credentialPublicKey: BLOB
+    * credential_id: TEXT
+    * credential_public_key: BLOB
     * counter: BIGINT UNSIGNED
-    * credentialDeviceType: VARCHAR(32)
-    * credentialBackedUp: BOOL
+    * credential_device_type: VARCHAR(32)
+    * credential_backed_up: BOOL
     transports: VARCHAR(255) DEFAULT NULL
     * user_id: BIGINT UNSIGNED <<FK>>
 }
