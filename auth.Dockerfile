@@ -16,6 +16,7 @@ COPY --chown=node:node constants/db.js constants/
 COPY --chown=node:node constants/auth.js constants/
 COPY --chown=node:node helpers/auth/ helpers/auth/
 COPY --chown=node:node helpers/database/user/ helpers/database/user/
+COPY --chown=node:node helpers/database/authenticator/ helpers/database/authenticator/
 COPY --chown=node:node library/ library/
 EXPOSE 4200
 CMD [ "node", "api/auth/main.js" ]
