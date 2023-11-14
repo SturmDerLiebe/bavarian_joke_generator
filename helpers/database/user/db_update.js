@@ -14,7 +14,7 @@ async function db_update_challange(user_id, new_challange, connection_options) {
   const CONNECTION = await mysql.createConnection(
     connection_options || get_connection_options("authenticate"),
   );
-  const QUERY = "UPDATE users SET currentChallange=? WHERE users.id=?";
+  const QUERY = "UPDATE users SET current_challange = ? WHERE id = ?;";
 
   try {
     await CONNECTION.execute(QUERY, [new_challange, user_id]);
