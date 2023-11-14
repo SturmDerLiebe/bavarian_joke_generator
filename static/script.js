@@ -1,6 +1,7 @@
 "use strict";
 
-import { startRegistration } from "@simplewebauthn/browser";
+import { startRegistration } from "https://unpkg.com/@simplewebauthn/browser@8.3.4/dist/bundle/index.umd.min.js";
+// import { startRegistration } from "@simplewebauthn/browser";
 
 const REGISTER_MSG = document.getElementById("register-message");
 const REGISTER_BTN = document.getElementById("start-register");
