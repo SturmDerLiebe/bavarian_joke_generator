@@ -60,8 +60,7 @@
   src:
     local("Bertholdr Mainzer Fraktur"),
     local("Bertholdr-Mainzer-Fraktur"),
-    url("../assets/fonts/Bertholdr-Mainzer-Fraktur.ttf")
-      format("truetype"),
+    url("../assets/fonts/Bertholdr-Mainzer-Fraktur.ttf") format("truetype");
 }
 
 /* CSS Presets: */
