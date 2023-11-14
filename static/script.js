@@ -1,7 +1,7 @@
 "use strict";
 
-import { startRegistration } from "https://unpkg.com/@simplewebauthn/browser@8.3.4/dist/bundle/index.umd.min.js";
 // import { startRegistration } from "@simplewebauthn/browser";
+const { startRegistration } = SimpleWebAuthnBrowser;
 
 const REGISTER_MSG = document.getElementById("register-message");
 const REGISTER_BTN = document.getElementById("start-register");
@@ -29,9 +29,10 @@ CLOSE_BTN.addEventListener("click", function close_modal() {
 // Start registration when the user clicks a button
 SUBMIT_BTN.addEventListener("click", async () => {
   /*——— 1. Get registration options from the Relying Party (your server) ————*/
-  // TODO: Add Username
   const USERNAME = USERNAME_INPUT.value;
-  const RESPONSE = await fetch("/auth/generate-registration-options");
+  const RESPONSE = await fetch(
+    `/auth/generate-registration-options?username=${USERNAME}`,
+  );
 
   let attResp;
   try {
@@ -58,17 +59,12 @@ SUBMIT_BTN.addEventListener("click", async () => {
     body: JSON.stringify(attResp),
   });
 
-  // Wait for the results of verification
-  const VERIFICATION_JSON = await verificationResp.json();
-
   // Show UI appropriate for the `verified` status
-  if (VERIFICATION_JSON && VERIFICATION_JSON.verified) {
+  if (verificationResp.ok) {
     REGISTER_MSG.textContent =
       "You successfully created your profile. How about you try submitting a joke with your name?";
     REGISTER_BTN.remove();
   } else {
-    elemError.innerHTML = `We are sorry, but something went wrong! Response: <pre>${JSON.stringify(
-      VERIFICATION_JSON,
-    )}</pre >`;
+    REGISTER_MSG.textContent = `We are sorry, but something went wrong! Response error: ${verificationResp.status}`;
   }
 });
