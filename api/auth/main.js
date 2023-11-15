@@ -146,6 +146,10 @@ APP.post(
       /*—————————————————————— Saving Authenticator  ——————————————————————————————————*/
       // 3. Post-registration responsibilities
       const { registrationInfo } = verification;
+
+      /**
+       * @type {import("../../types/Joke.js").Authenticator}
+       */
       const {
         credentialPublicKey,
         credentialID,
