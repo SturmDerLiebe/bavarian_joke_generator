@@ -8,7 +8,7 @@ IF NOT EXISTS users (
     username VARCHAR(30) NOT NULL,
     current_challange TEXT DEFAULT NULL, 
     PRIMARY KEY (id),
-    UNIQUE INDEX (username)
+    UNIQUE INDEX (username(30))
 );
 
 CREATE TABLE
@@ -48,7 +48,7 @@ IF NOT EXISTS keyword (
     title VARCHAR(30) NOT NULL,
     times_searched BIGINT UNSIGNED DEFAULT 0,
     PRIMARY KEY (id),
-    UNIQUE INDEX (title)
+    UNIQUE INDEX (title(30))
 );
 
 -- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
