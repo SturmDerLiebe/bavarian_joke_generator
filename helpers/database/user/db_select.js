@@ -23,7 +23,6 @@ async function db_select_challange(user_id, connection_options) {
      * @type {import("../../../types/Database.js").Mysql2_Selection_Return_Data}
      */
     const [[CHALLANGE]] = await CONNECTION.execute(QUERY, [user_id]);
-    console.debug(CHALLANGE);
     return CHALLANGE.currentChallange;
   } catch (error) {
     // TODO: Check if there are any errors to handle here.
