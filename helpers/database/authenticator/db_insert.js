@@ -46,7 +46,7 @@ async function db_insert_authenticator(
       counter,
       credentialDeviceType,
       credentialBackedUp,
-      transports,
+      transports || null,
       user_id,
     ]);
   } catch (error) {
