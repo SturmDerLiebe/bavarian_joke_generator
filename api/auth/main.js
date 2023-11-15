@@ -23,6 +23,7 @@ const APP = express();
 /* =================== Registration ========================================= */
 
 /* ——————————————————— GET /generate-registration-options?username —————————— */
+// 1. Generate registration options
 APP.get("/generate-registration-options", async function (request, response) {
   try {
     const USERNAME = request.query.username;
@@ -96,6 +97,7 @@ APP.get("/generate-registration-options", async function (request, response) {
  * @property {string} username
  */
 
+// 2. Verify registration response
 APP.post(
   "/verify-registration",
   cookieParser(),
@@ -142,6 +144,7 @@ APP.post(
         );
       }
       /*—————————————————————— Saving Authenticator  ——————————————————————————————————*/
+      // 3. Post-registration responsibilities
       const { registrationInfo } = verification;
       const {
         credentialPublicKey,
@@ -188,6 +191,10 @@ APP.post(
 );
 
 /* ========================= Log in ======================================== */
+
+/* ———————————————— /generate-authentication-options?username —————————————— */
+// 1. Generate authentication options
+//APP.get();
 
 APP.listen(AUTH_PORT, () => {
   console.log(`Authentication running on port ${AUTH_PORT}`);
