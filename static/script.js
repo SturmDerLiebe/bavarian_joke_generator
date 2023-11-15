@@ -3,6 +3,8 @@
 // import { startRegistration } from "@simplewebauthn/browser";
 const { startRegistration } = SimpleWebAuthnBrowser;
 
+// TODO: Add logic to authenticate via submitting a joke
+
 const REGISTER_MSG = document.getElementById("register-message");
 const REGISTER_BTN = document.getElementById("start-register");
 
