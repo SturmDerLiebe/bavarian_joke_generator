@@ -34,19 +34,19 @@ async function db_insert_authenticator(
     credential_backed_up,
     transports,
     user_id
-) VALUES (?, ?, ?, ?, ?, ?);`;
+) VALUES (?, ?, ?, ?, ?, ?, ?);`;
   try {
     /**
      * Only the Result data
      * @type {import("../../../types/Database.js").Mysql2_Insertion_Return_Data}
      */
     const [USER_HEADER] = await CONNECTION.execute(QUERY, [
-      credentialID,
+      Buffer.from(credentialID.buffer).toString("base64url"), // Insert as base64URL string
       credentialPublicKey,
       counter,
       credentialDeviceType,
       credentialBackedUp,
-      transports || null,
+      !transports ? null : transports.join(), // Insert as CSV string
       user_id,
     ]);
   } catch (error) {
