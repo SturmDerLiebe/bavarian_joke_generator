@@ -8,7 +8,7 @@ IF NOT EXISTS users (
     username VARCHAR(30) NOT NULL,
     current_challange TEXT DEFAULT NULL, 
     PRIMARY KEY (id),
-    UNIQUE (username)
+    UNIQUE INDEX (username)
 );
 
 CREATE TABLE
@@ -22,6 +22,7 @@ IF NOT EXISTS authenticator (
     transports VARCHAR(255) DEFAULT NULL,
     user_id BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (id),
+    -- INDEX (credential_id()),
     FOREIGN KEY (user_id) REFERENCES users (
         id
     ) ON DELETE CASCADE ON UPDATE CASCADE
@@ -47,7 +48,7 @@ IF NOT EXISTS keyword (
     title VARCHAR(30) NOT NULL,
     times_searched BIGINT UNSIGNED DEFAULT 0,
     PRIMARY KEY (id),
-    UNIQUE (title)
+    UNIQUE INDEX (title)
 );
 
 -- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
