@@ -20,6 +20,10 @@ server {
         root /usr/share/nginx;
     }
 
+    location ^~ /RegEx/ {
+        root /usr/share/nginx;
+    }
+
     location ^~ /ssr/ {
         # pass will exchange ssr/ for /:
         proxy_pass "http://${SSR_HOST}:${SSR_PORT}/";
