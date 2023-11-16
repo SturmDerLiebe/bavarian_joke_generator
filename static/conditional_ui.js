@@ -1,6 +1,8 @@
 "use strict";
-
+// See https://simplewebauthn.dev/docs/packages/browser#browser-autofill-aka-conditional-ui
 const { startAuthentication } = SimpleWebAuthnBrowser;
-startAuthentication(options, true).catch(
-  console.info("Loading conditional UI"),
-);
+fetch("/auth/generate-authentication-options").then((options) => {
+  startAuthentication(options, true).catch((err) =>
+    console.info("Conditional UI loaded"),
+  );
+});
