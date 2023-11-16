@@ -136,7 +136,8 @@ APP.post(
         });
       } catch (error) {
         console.error(error);
-        return response.status(400).statusMessage(error.message).end();
+        response.statusMessage = error.message;
+        return response.status(400).end();
       }
       if (!verification.verified) {
         throw new Client_Error(
