@@ -15,7 +15,7 @@
   </head>
   <body>
     <header>
-      <h1 lang="bar" >Griasd eich zum Bavarian Joke Generator</h1>
+      <h1 lang="bar">Griasd eich zum Bavarian Joke Generator</h1>
     </header>
     <main>
       <section>
@@ -50,11 +50,12 @@
         <!-- Joke Submission: -->
         <h2>Submit a joke</h2>
         <form
+          id="submit_form"
           action="/ssr/submit"
           method="post"
           title='- For Keywords only use English letters.
-- For Content only use German letters.
-- For Explanation only use English letters.
+- For Content only use German letters and punctuation.
+- For Explanation only use English letters and punctuation.
 - Use a format like "Mouse, Dog, Cat" for multiple Keywords.
 - Leave the Username empty for an anonymous submission
 - For Username only english letters, numbers and the symbols "- _" are allowed.'
@@ -123,7 +124,11 @@
               autocomplete="webauthn"
             />
           </label>
-          <button type="submit">Submit Joke</button>
+          <span id="login_error" hidden role="alert"
+            >There has been an isse logging in. Please try submitting your joke
+            with your correct username again or submit it anonymously</span
+          >
+          <button id="submit_joke" type="submit">Submit Joke</button>
         </form>
 
         <hr />
@@ -134,10 +139,12 @@
               For <b>Keywords</b> only use <em>English</em> letters.
             </li>
             <li id="content_hint" aria-role="tooltip">
-              For the <b>Content</b> only use <em>German</em> letters.
+              For the <b>Content</b> only use <em>German</em> letters and
+              punctuation.
             </li>
             <li id="explanation_hint" aria-role="tooltip">
-              For an <b>Explanation</b> only use <em>English</em> letters.
+              For an <b>Explanation</b> only use <em>English</em> letters and
+              punctuation.
             </li>
             <li id="keywords_hint" aria-role="tooltip">
               Use a format like
@@ -154,10 +161,10 @@
           </ul>
         </footer>
       </section>
-      <!-- ————————————— Login & Submit——————————————————————————————————— -->
+      <!-- ————————————— Sign Up ——————————————————————————————————— -->
       <section>
         <h2>Create your own profile</h2>
-        <p id="register-message">
+        <p id="register-message" role="alert">
           If you want to have your username shown next to your submitted joke,
           <strong>register your new profile here</strong>:
         </p>
@@ -172,7 +179,7 @@
               <input
                 id="username"
                 type="text"
-                pattern="^[A-Za-z0-9_\-–—]*$"
+                pattern="^[A-Za-z0-9_\-]$"
                 size="40"
                 placeholder="e.g. Mira"
                 aria-describedby="username_hint"
