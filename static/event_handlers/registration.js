@@ -27,8 +27,6 @@ function get_registration_handler(username, register_btn, register_msg) {
 
       // Error Handling:
     } catch (error) {
-      register_btn.textContent = "Try again";
-
       if (response.status === 409) {
         register_msg.textContent =
           "Sorry, but the Username you chose was already taken. Please try a new one!";
@@ -36,6 +34,8 @@ function get_registration_handler(username, register_btn, register_msg) {
         register_msg.textContent = error;
         // TODO: Delete username from db
       }
+      register_btn.textContent = "Try again";
+      register_btn.focus();
       return; // Don't continue
     }
 
