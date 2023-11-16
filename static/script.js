@@ -17,9 +17,6 @@ const CONTENT_AREA = document.getElementById("content");
 const EXPLANATION_AREA = document.getElementById("explanation");
 
 /** @type {HTMLInputElement} */
-const KEYWORDS_INPUT = document.getElementById("keywords");
-
-/** @type {HTMLInputElement} */
 const SUBMITTED_BY_INPUT = document.getElementById("submitter");
 
 /** @type {HTMLSpanElement} */
@@ -36,7 +33,7 @@ SUBMIT_JOKE_FORM.addEventListener("submit", async function joke_handler(event) {
     setTimeout(() => {
       CONTENT_AREA.setCustomValidity("");
     }, 5000); // -> new submits will stay invalid for 5 seconds!
-    return;
+    return event.preventDefault();
   }
   if (!EXPLANATION_PATTERN.test(EXPLANATION_AREA.value)) {
     EXPLANATION_AREA.setCustomValidity(
@@ -47,16 +44,18 @@ SUBMIT_JOKE_FORM.addEventListener("submit", async function joke_handler(event) {
     setTimeout(() => {
       EXPLANATION_AREA.setCustomValidity("");
     }, 5000);
-    return;
+    return event.preventDefault();
   }
 
   if (SUBMITTED_BY_INPUT.value) {
     /* ————————————————— WebauthnLogin ————————————————————————————————————— */
     try {
       // Make sure to always call this after constraint validation was done via reportValidity()
-      event.preventDefault(); // For some unkown reason the following fetch calls ignore a preventDefault that comes afterwards
-      await handle_login(SUBMITTED_BY_INPUT.value, event);
-      SUBMIT_JOKE_FORM.submit();
+      event.preventDefault(); // For some unkown reason the following fetch calls ignore a preventDefault that comes afterwards #1
+      is_finished = await handle_login(SUBMITTED_BY_INPUT.value, event);
+      if (is_finished) {
+        SUBMIT_JOKE_FORM.submit(); // For some otherworldly reason, the submit does not wait on the error handlich to finish. Investigate this (TODO), see #1
+      }
     } catch (error) {
       ERROR_SPAN.innerText = error.message;
       ERROR_SPAN.hidden = false;
