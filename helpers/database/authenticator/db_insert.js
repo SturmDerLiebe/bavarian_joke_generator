@@ -46,7 +46,7 @@ async function db_insert_authenticator(
       counter,
       credentialDeviceType,
       credentialBackedUp,
-      !transports ? null : transports.join(), // Insert as CSV string
+      !transports ? null : transports.join(","), // Insert as CSV string
       user_id,
     ]);
   } catch (error) {
