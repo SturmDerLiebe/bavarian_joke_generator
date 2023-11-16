@@ -22,7 +22,7 @@ IF NOT EXISTS authenticator (
     transports VARCHAR(255) DEFAULT NULL,
     user_id BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (id),
-    -- INDEX (credential_id()),
+    INDEX (credential_id(50)), -- max lenght is currently 26
     FOREIGN KEY (user_id) REFERENCES users (
         id
     ) ON DELETE CASCADE ON UPDATE CASCADE
