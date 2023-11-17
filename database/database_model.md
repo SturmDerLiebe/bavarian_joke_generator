@@ -68,7 +68,7 @@ entity Keyword  {
     * id: SERIAL <<PK>>
     --
     * title: VARCHAR(30) <<SK>>
-    searched_times: BIGINT UNSIGNED DEFAULT 0
+    searched_times: BIGINT UNSIGNED
 }
 
 entity users {
@@ -76,7 +76,7 @@ entity users {
     * id: SERIAL <<PK>>
     --
     * username VARCHAR(30) <<SK>>
-    current_challange: TEXT DEFAULT NULL
+    current_challange: TEXT
 }
 
 entity authenticator {
@@ -84,10 +84,10 @@ entity authenticator {
     --
     * credential_id: TEXT |I|
     * credential_public_key: BLOB
-    * counter: BIGINT UNSIGNED
+    * counter: BIGINT UNSIGNED DEFAULT 0
     * credential_device_type: VARCHAR(32)
     * credential_backed_up: BOOL
-    transports: VARCHAR(255) DEFAULT NULL
+    transports: VARCHAR(255)
     * user_id: BIGINT UNSIGNED <<FK>>
 }
 
@@ -98,7 +98,7 @@ users ||--|{ authenticator : logs in via >
 
 legend
     Attributes with a • (list marker) have the NOT NULL constraint.
-    Attributes without a • (list marker) have the DEFAULT NULL.
+    Attributes without a • (list marker) have the DEFAULT NULL unless specified otherwise.
     Attributes with <<SK>> have an UNIQUE Index.
     Attributes with |I| are indexed as well.
 endlegend
