@@ -64,3 +64,19 @@ This next diagram shows the real implementation of this project's relational dat
 Be aware that this **only** includes features from the [included features](#i.-implemented-use-cases%3A).
 Any use case still to be implemented is not necessarily yet possible with this design.
 ![The physical data model of this project's database design with its attributes](assets/PDM.svg)
+
+### c) Contributing
+ALthough this is a private and small university project, everyone is free to fork this repository, submit pull request and report issues.
+
+#### i. Development Setup
+To run this website (webserver) on your local machine:
+1. Make sure you can run docker-compose
+2. PNPM is installed on your system
+3. Run the following commands in your projects folder:
+`pnpm install`
+```bash
+pnpm docker-dev
+# or
+pnpm docker-test #before running any tests
+```
+-> The website is now visitable on [localhost/](http://localhost/)
