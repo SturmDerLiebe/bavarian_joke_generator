@@ -14,7 +14,8 @@
     "docker-kill": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development kill",
     "playwright": "NODE_ENV=test playwright test --project",
     "jest": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=environment/.env.test jest --setupFiles=dotenv/config --detectOpenHandles --selectProjects",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "production-up": "docker-compose -f docker-compose.production.yaml --env-file ./environment/.env.production up --build"
   },
   "devDependencies": {
     "@playwright/test": "^1.39.0",
