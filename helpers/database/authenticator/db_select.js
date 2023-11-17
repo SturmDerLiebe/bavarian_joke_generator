@@ -37,7 +37,7 @@ WHERE u.username = ?;
 
     if (!Authenticators.length) {
       throw new Not_Found_Error(
-        "The User you are trying to sign in as, does not exist yet",
+        "The User you are trying to sign in as, does not have any authenticators yet",
       );
     }
     return [
