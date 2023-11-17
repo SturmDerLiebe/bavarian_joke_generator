@@ -13,7 +13,7 @@ import { Duplicate_Error } from "../../library/Errors.js";
  * @throws {Error} If any connection error or similar happens.
  */
 async function db_create_joke(
-  { content, explanation, submitted_by, keywords },
+  { content, explanation, submitted_by: submitted_by_user, keywords },
   connection_options,
 ) {
   // Set up connection and queries:
@@ -27,8 +27,14 @@ async function db_create_joke(
    */
   const QUERIES = [
     [
-      "INSERT INTO joke(content, explanation, submitted_by) VALUES(?, ?, ?);",
-      [content, explanation, submitted_by || null], // Insert anonymous submitters (="") as NULL
+      `
+INSERT INTO joke (content, explanation, submitted_by)
+VALUES (
+    ?, ?,
+    (SELECT id FROM users WHERE username = ?)
+);
+`,
+      [content, explanation, submitted_by_user || null], // Insert anonymous submitters (="") as NULL
     ],
     ["SET @j_id = LAST_INSERT_ID();"], // Save new joke_id for following inserts
   ].concat(repeat_keyword_INSERT(keywords));
@@ -51,7 +57,7 @@ async function db_create_joke(
       // https://dev.mysql.com/doc/mysql-errors/8.0/en/server-error-reference.html#error_er_dup_entry
       throw new Duplicate_Error("The Joke already exists in our database");
     }
-    throw new Error(error);
+    throw error;
   } finally {
     await CONNECTION.end();
   }
