@@ -3,18 +3,18 @@
 const { startRegistration } = SimpleWebAuthnBrowser;
 
 /**
- * @param {string} username
+ * @param {HTMLInputElement} username_input
  * @param {HTMLButtonElement} register_btn
  * @param {HTMLParagraphElement} register_msg
  */
-function get_registration_handler(username, register_btn, register_msg) {
+function get_registration_handler(username_input, register_btn, register_msg) {
   return async () => {
     let response;
     let attResp;
     try {
       /*——— 1. Get registration options from the Relying Party (your server) ————*/
       response = await fetch(
-        `/auth/generate-registration-options?username=${username}`,
+        `/auth/generate-registration-options?username=${username_input.value}`,
       );
       if (!response.ok) {
         throw new Error(
