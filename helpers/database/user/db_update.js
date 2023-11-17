@@ -19,8 +19,7 @@ async function db_update_challange(user_id, new_challange, connection_options) {
   try {
     await CONNECTION.execute(QUERY, [new_challange, user_id]);
   } catch (error) {
-    // TODO: Check if there are any errors to handle here.
-    throw new Error(error);
+    throw error;
   } finally {
     await CONNECTION.end();
   }

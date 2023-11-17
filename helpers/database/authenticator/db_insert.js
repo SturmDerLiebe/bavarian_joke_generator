@@ -50,7 +50,7 @@ async function db_insert_authenticator(
       user_id,
     ]);
   } catch (error) {
-    throw new Error(error);
+    throw error;
   } finally {
     await CONNECTION.end();
   }

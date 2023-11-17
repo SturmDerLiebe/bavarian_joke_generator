@@ -31,7 +31,7 @@ async function db_insert_user(username, connection_options) {
       // https://dev.mysql.com/doc/mysql-errors/8.0/en/server-error-reference.html#error_er_dup_entry
       throw new Duplicate_Error("The username is already taken");
     }
-    throw new Error(error);
+    throw error;
   } finally {
     await CONNECTION.end();
   }

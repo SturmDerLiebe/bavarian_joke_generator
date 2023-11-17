@@ -26,7 +26,7 @@ async function db_select_challange(user_id, connection_options) {
     return CHALLANGE.currentChallange;
   } catch (error) {
     // TODO: Check if there are any errors to handle here.
-    throw new Error(error);
+    throw error;
   } finally {
     await CONNECTION.end();
   }
