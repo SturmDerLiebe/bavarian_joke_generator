@@ -70,10 +70,10 @@ APP.get("/generate-registration-options", async function (request, response) {
         "user_data",
         { id: NEW_USER_ID, username: USERNAME },
         {
-          domain: process.env.RP_ID,
+          domain: RP_ID,
           expires: 0, // SESSION cookie
           httpOnly: true,
-          secure: process.env.NODE_ENV == "development" ? true : false,
+          secure: process.env.NODE_ENV == "production" ? true : false,
           sameSite: "strict",
         },
       )
