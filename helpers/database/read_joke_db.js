@@ -26,9 +26,9 @@ async function db_read_joke(keyword, connection_options) {
           j.content,
           j.explanation,
           IF(
-              j.submitted_by IS NOT NULL,
-              u.username,
-              'Anonymous'
+              ISNULL(j.submitted_by),
+              'Anonymous',
+              u.username
           ) AS submitted_by
       FROM joke AS j
       INNER JOIN jk_pair AS jkp ON j.id = jkp.joke_id
@@ -62,9 +62,9 @@ async function db_read_single_joke(id, connection_options) {
           j.content,
           j.explanation,
           IF(
-              j.submitted_by IS NOT NULL,
-              u.username,
-              'Anonymous'
+              ISNULL(j.submitted_by),
+              'Anonymous',
+              u.username
           ) AS submitted_by
       FROM joke AS j
       LEFT JOIN users AS u ON j.submitted_by = u.id
