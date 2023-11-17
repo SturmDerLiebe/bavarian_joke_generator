@@ -47,14 +47,15 @@ SUBMIT_JOKE_FORM.addEventListener("submit", async function joke_handler(event) {
     return event.preventDefault();
   }
 
-  if (SUBMITTED_BY_INPUT.value) {
+  if (SUBMITTED_BY_INPUT.value.length) {
     /* ————————————————— WebauthnLogin ————————————————————————————————————— */
     try {
       // Make sure to always call this after constraint validation was done via reportValidity()
       event.preventDefault(); // For some unkown reason the following fetch calls ignore a preventDefault that comes afterwards #1
-      is_finished = await handle_login(SUBMITTED_BY_INPUT.value, event);
+      const is_finished = await handle_login(SUBMITTED_BY_INPUT.value, event);
       if (is_finished) {
-        SUBMIT_JOKE_FORM.submit(); // For some otherworldly reason, the submit does not wait on the error handlich to finish. Investigate this (TODO), see #1
+        SUBMIT_JOKE_FORM.submit(); // For some otherworldly reason, the submit does not wait on the error handling to finish. Investigate this (TODO), see #1
+        return;
       }
     } catch (error) {
       ERROR_SPAN.innerText = error.message;
@@ -88,16 +89,17 @@ REGISTER_BTN.addEventListener("click", function show_modal() {
  * @type{HTMLInputElement}
  */
 const USERNAME_INPUT = document.getElementById("username");
-const SUBMIT_BTN = document.getElementById("register");
+/** @type {HTMLDialogElement} */
+const REGISTER_DIALOG = document.getElementById("registration-modal");
 
 const CLOSE_BTN = document.getElementById("close");
 CLOSE_BTN.addEventListener("click", function close_modal() {
   MODAL.close("close");
 });
-const USERNAME = USERNAME_INPUT.value;
 
 // Start registration when the user clicks a button
-SUBMIT_BTN.addEventListener(
-  "click",
-  get_registration_handler(USERNAME, REGISTER_BTN, REGISTER_MSG),
+REGISTER_DIALOG.addEventListener(
+  // Form submit event will not fire here!
+  "close",
+  get_registration_handler(USERNAME_INPUT, REGISTER_BTN, REGISTER_MSG),
 );
