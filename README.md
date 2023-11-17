@@ -26,7 +26,7 @@ The website can currently be accessed on **IP** (*might change*)
 - **Database**: MySQL via myql2 Node.js client
 
 ### b) Database Models
-#### i. Implemented Use Cases: {#included-features}
+#### i. Implemented Use Cases: 
 - A user can search for *any* Bavarian jokes by submitting *one* English keyword
 - A user can submit a Bavarian joke alongside _at least one_, related keyword
 - A Bavarian joke is accompanied by its required explanation in English
@@ -61,6 +61,6 @@ If you are unfamiliar with its crow foot notation, [this image can help you](htt
 
 #### iiii. Physical Model
 This next diagram shows the real implementation of this project's relational database with MySQL,
-Be aware that this **only** includes features from the [included features](#included-features).
+Be aware that this **only** includes features from the [included features](#i.-implemented-use-cases%3A).
 Any use case still to be implemented is not necessarily yet possible with this design.
 ![The physical data model of this project's database design with its attributes](assets/PDM.svg)
