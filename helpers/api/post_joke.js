@@ -1,6 +1,6 @@
 "use strict";
 
-import { USERNAME_PATTERN } from "../../RegEx/username.js";
+import { SUBMIT_USERNAME_PATTERN } from "../../RegEx/username.js";
 
 /**
  * Checks if the user submitted data is valid.
@@ -15,7 +15,7 @@ function is_valid_joke_data({ content, explanation, keywords, submitted_by }) {
     CONTENT_REGEX.test(content) &&
     EXPLANATION_REGEX.test(explanation) &&
     KEYWORDS_REGEX.test(keywords) &&
-    USERNAME_PATTERN.test(submitted_by)
+    SUBMIT_USERNAME_PATTERN.test(submitted_by)
   );
 }
 

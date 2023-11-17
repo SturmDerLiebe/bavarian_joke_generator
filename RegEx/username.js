@@ -1,5 +1,6 @@
 "use strict";
 
-const USERNAME_PATTERN = /^[A-Za-z0-9_\-]+$/;
+const SUBMIT_USERNAME_PATTERN = /^[A-Za-z0-9_\-]*$/;
+const AUTH_USERNAME_PATTERN = /^[A-Za-z0-9_\-]+$/;
 
-export { USERNAME_PATTERN };
+export { SUBMIT_USERNAME_PATTERN, AUTH_USERNAME_PATTERN };

@@ -1,6 +1,6 @@
 "use strict";
 
-import { USERNAME_PATTERN } from "../../RegEx/username.js";
+import { AUTH_USERNAME_PATTERN } from "../../RegEx/username.js";
 
 /**
  * Checks if the username is valid.
@@ -8,7 +8,7 @@ import { USERNAME_PATTERN } from "../../RegEx/username.js";
  * @returns {boolean}
  */
 function is_valid_username(username) {
-  return USERNAME_PATTERN.test(username);
+  return AUTH_USERNAME_PATTERN.test(username);
 }
 
 export { is_valid_username };
