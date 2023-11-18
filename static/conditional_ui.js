@@ -1,7 +1,5 @@
 "use strict";
 
-const { error } = require("console");
-
 // See https://simplewebauthn.dev/docs/packages/browser#browser-autofill-aka-conditional-ui
 const { startAuthentication } = SimpleWebAuthnBrowser;
 fetch("/auth/generate-authentication-options")
