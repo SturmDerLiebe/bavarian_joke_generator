@@ -19,117 +19,121 @@
     </header>
     <main>
       <section>
-        <h2>Generate a Joke</h2>
-        <!-- Joke Generator: -->
-        <form
-          action="/ssr/"
-          method="get"
-          title="Only use English letters for keywords"
-        >
-          <h3>What should the joke be about?</h3>
-          <label for="keyword"
-            >Keyword:
-            <!-- Validates only one english lettered word -->
-            <input
-              id="keyword"
-              name="keyword"
-              type="search"
-              placeholder="e.g. Dog"
-              pattern="^[A-Za-z]+$"
-              minlength="2"
-              aria-describedby="keyword_hint"
-              spellcheck="true"
-              autocomplete="on"
-              required
-          /></label>
-          <button type="submit" data-testid="gen-btn">Generate Joke</button>
-        </form>
+        <article>
+          <h2>Generate a Joke</h2>
+          <!-- Joke Generator: -->
+          <form
+            action="/ssr/"
+            method="get"
+            title="Only use English letters for keywords"
+          >
+            <h3>What should the joke be about?</h3>
+            <label for="keyword"
+              >Keyword:
+              <!-- Validates only one english lettered word -->
+              <input
+                id="keyword"
+                name="keyword"
+                type="search"
+                placeholder="e.g. Dog"
+                pattern="^[A-Za-z]+$"
+                minlength="2"
+                aria-describedby="keyword_hint"
+                spellcheck="true"
+                autocomplete="on"
+                required
+            /></label>
+            <button type="submit" data-testid="gen-btn">Generate Joke</button>
+          </form>
+        </article>
 
         <hr />
-
         <!-- Joke Submission: -->
-        <h2>Submit a joke</h2>
-        <form
-          id="submit_form"
-          action="/ssr/submit"
-          method="post"
-          title='- For Keywords only use English letters.
-- For Content only use German letters and punctuation.
-- For Explanation only use English letters and punctuation.
-- Use a format like "Mouse, Dog, Cat" for multiple Keywords.
-- Leave the Username empty for an anonymous submission
-- For Username only english letters, numbers and the symbols "- _" are allowed.'
-        >
-          <h3>Your Bavarian joke</h3>
-          <label for="content">Content:</label>
-          <!-- Validates only German sentences/words with the specified range of characters -->
-          <textarea
-            id="content"
-            name="content"
-            lang="bar"
-            placeholder="Es war amoi..."
-            cols="50"
-            rows="10"
-            wrap="soft"
-            minlength="10"
-            maxlength="1000"
-            aria-describedby="content_hint"
-            spellcheck="false"
-            autocomplete="off"
-            required
-          ></textarea>
-          <h3>Explain or translate your joke in English</h3>
-          <label for="explanation">Explanation:</label>
-          <!-- Validates only English sentences/words with the specified range of characters -->
-          <textarea
-            id="explanation"
-            name="explanation"
-            placeholder="Once upon a time..."
-            cols="50"
-            rows="10"
-            wrap="soft"
-            minlength="10"
-            maxlength="1000"
-            aria-describedby="explanation_hint"
-            spellcheck="true"
-            autocomplete="off"
-            required
-          ></textarea>
-          <h3>Which key words would you associate with your joke?</h3>
-          <label for="keywords"
-            >Keywords:
-            <!-- Validates only "Dog" or "Dog, Cat"-like strings -->
-            <input
-              id="keywords"
-              type="text"
-              name="keywords"
-              pattern="^[A-Za-z]+(?:,\s[A-Za-z]+)*$"
-              placeholder="e.g. Dog"
-              minlength="2"
-              aria-describedby="keywords_hint"
+        <article>
+          <h2>Submit a joke</h2>
+          <form
+            id="submit_form"
+            action="/ssr/submit"
+            method="post"
+            title='- For Keywords only use English letters.
+            - For Content only use German letters and punctuation.
+            - For Explanation only use English letters and punctuation.
+            - Use a format like "Mouse, Dog, Cat" for multiple Keywords.
+            - Leave the Username empty for an anonymous submission
+            - For Username only english letters, numbers and the symbols "- _" are allowed.'
+          >
+            <h3>Your Bavarian joke</h3>
+            <label for="content">Content:</label>
+            <!-- Validates only German sentences/words with the specified range of characters -->
+            <textarea
+              id="content"
+              name="content"
+              lang="bar"
+              placeholder="Es war amoi..."
+              cols="50"
+              rows="10"
+              wrap="soft"
+              minlength="10"
+              maxlength="1000"
+              aria-describedby="content_hint"
+              spellcheck="false"
+              autocomplete="off"
+              required
+            ></textarea>
+            <h3>Explain or translate your joke in English</h3>
+            <label for="explanation">Explanation:</label>
+            <!-- Validates only English sentences/words with the specified range of characters -->
+            <textarea
+              id="explanation"
+              name="explanation"
+              placeholder="Once upon a time..."
+              cols="50"
+              rows="10"
+              wrap="soft"
+              minlength="10"
+              maxlength="1000"
+              aria-describedby="explanation_hint"
               spellcheck="true"
               autocomplete="off"
               required
-          /></label>
-          <label for="submitter"
-            >Your Username:
-            <input
-              id="submitter"
-              type="text"
-              name="submitted_by"
-              pattern="^[A-Za-z0-9_\-]*$"
-              placeholder="e.g. Milo"
-              aria-describedby="submitter_hint username_hint"
-              spellcheck="false"
-              autocomplete="username webauthn"
-            />
-          </label>
-          <span id="login_error" hidden role="alert"
-            >There has been an isse logging in. Please try submitting your joke
-            with your correct username again or submit it anonymously</span
-          >
-          <button id="submit_joke" type="submit">Submit Joke</button>
-        </form>
+            ></textarea>
+            <h3>Which key words would you associate with your joke?</h3>
+            <label for="keywords"
+              >Keywords:
+              <!-- Validates only "Dog" or "Dog, Cat"-like strings -->
+              <input
+                id="keywords"
+                type="text"
+                name="keywords"
+                pattern="^[A-Za-z]+(?:,\s[A-Za-z]+)*$"
+                placeholder="e.g. Dog"
+                minlength="2"
+                aria-describedby="keywords_hint"
+                spellcheck="true"
+                autocomplete="off"
+                required
+            /></label>
+            <label for="submitter"
+              >Your Username:
+              <input
+                id="submitter"
+                type="text"
+                name="submitted_by"
+                pattern="^[A-Za-z0-9_\-]*$"
+                placeholder="e.g. Milo"
+                aria-describedby="submitter_hint username_hint"
+                spellcheck="false"
+                autocomplete="username webauthn"
+              />
+            </label>
+            <span id="login_error" hidden role="alert"
+              >There has been an isse logging in. Please try submitting your
+              joke with your correct username again or submit it
+              anonymously</span
+            >
+            <button id="submit_joke" type="submit">Submit Joke</button>
+          </form>
+        </article>
 
         <hr />
 
@@ -162,16 +166,18 @@
         </footer>
       </section>
       <!-- ————————————— Sign Up ——————————————————————————————————— -->
-      <section>
+      <hr />
+      <section class="signup-section">
         <h2>Create your own profile</h2>
         <p id="register-message" role="alert">
           If you want to have your username shown next to your submitted joke,
-          <strong>register your new profile here</strong>:
         </p>
+        <p><strong>register your new profile here</strong>:</p>
         <button id="start-register">Start Registration</button>
         <dialog id="registration-modal">
           <form
             method="dialog"
+            id="registration_form"
             title='Only english letters, numbers and the symbols "- _" are allowed.'
           >
             <label for="username">
@@ -189,7 +195,7 @@
               />
             </label>
             <button id="register" type="submit">Register</button>
-            <button id="close">Close</button>
+            <button id="close" type="reset">Close</button>
           </form>
         </dialog>
       </section>
