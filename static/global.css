@@ -73,7 +73,11 @@
   font-family: inherit;
 }
 
-/* Global CSS: */
+textarea {
+  font-size: inherit;
+}
+
+/*————————————————————————————— Global CSS: ————————————————————————————————*/
 :root {
   --scale-factor: 3;
   --base-font-size: 16px;
@@ -129,7 +133,8 @@ h1 {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   text-align: center;
   vertical-align: middle;
 }
@@ -160,4 +165,38 @@ hr {
   border-radius: 1em;
   border-width: 0.25em;
   box-shadow: 0 0 0.1em;
+}
+
+:not(section, article, figure) ~ hr {
+  margin-block: 0.5em;
+  margin-inline: 2em;
+  border-color: floralwhite;
+  border-width: 0.13em;
+}
+
+dialog {
+  margin: auto;
+}
+
+dialog > form {
+  min-height: 10em;
+  padding-inline: 1em;
+}
+
+/*————————————————————————————— Media queries ——————————————————————————————*/
+@media (max-width: 27em) {
+  html {
+    font-size: 12px;
+    padding-block: 1em;
+  }
+
+  header,
+  main {
+    width: 90%;
+    padding: 0 1em;
+  }
+
+  textarea {
+    width: 80%;
+  }
 }

@@ -1,6 +1,6 @@
 @import url("global.css") layer(globals);
 
-h2:first-child {
+article > h2:first-child {
   padding-block-start: 0.5em;
 }
 
@@ -17,6 +17,30 @@ kbd:only-of-type {
   min-height: 45em;
 }
 
+.signup-section,
 ul {
-  list-style-position: inside;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+ul {
+  min-height: 16em;
+  padding-inline: 2em;
+}
+
+.signup-section {
+  min-height: 10em;
+  align-items: center;
+}
+
+.signup-section > p {
+  text-align: center;
+}
+
+/*————————————————————————————— Media queries ——————————————————————————————*/
+@media (max-width: 27em) {
+  ul {
+    padding-inline: 1em;
+  }
 }
