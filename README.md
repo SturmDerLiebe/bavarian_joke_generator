@@ -15,8 +15,9 @@ In the future and further down in this document you will see some extra features
 
 The website can currently be accessed on **IP** (*might change*)
 ## B. Documentation
+- [Jump to local setup guide](#i-development-setup)
 ### a) Technologies used:
-- **Set up**: Docker
+- **Setup & Deplyment**: PNPM + Docker
 - **User Interface(Front End):** Plain HTML, CSS and JavaScript
     - **Authentication:** simplewebauthn
 - **Webserver**: NGINX
@@ -70,11 +71,11 @@ ALthough this is a private and small university project, everyone is free to for
 
 #### i. Development Setup
 To run this website (webserver) on your local machine:
-1. Make sure you can run docker-compose
-2. PNPM is installed on your system
+1. Make sure you can run [docker-compose](https://docs.docker.com/get-docker/) (*on Mac and Windows you will have to start Docker Desktop first*)
+2. [PNPM](https://pnpm.io/installation) is installed on your system
 3. Run the following commands in your projects folder:
-`pnpm install`
 ```bash
+pnpm install
 pnpm docker-dev
 # or
 pnpm docker-test #before running any tests
