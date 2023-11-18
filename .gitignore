@@ -1,7 +1,5 @@
 # Custom gitignore part:
-public
-**/production/
-**/*.production*
+.env.production
 
 # playwright
 /test-results/

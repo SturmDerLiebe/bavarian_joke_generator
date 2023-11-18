@@ -1,0 +1,68 @@
+services:
+  # ———————————————————— MYSQL DATABASE ——————————————————————————————————————
+  joke_database:
+    image: mysql:latest
+    volumes:
+      - "./database/mysql/production:/docker-entrypoint-initdb.d:ro"
+      - "db_data:/var/lib/mysql"
+    expose:
+      - "${DB_PORT}"
+    networks:
+      - sql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_ONETIME_PASSWORD: "yes"
+    command:
+      - --host-cache-size=3
+    restart: "on-failure"
+  # ———————————————————— SSR ——————————————————————————————————————
+  joke_ssr:
+    image: ssr:latest
+    build:
+      context: ./
+      dockerfile: ssr.Dockerfile
+    expose:
+      - "${SSR_PORT}"
+    networks:
+      - sql
+      - web
+    env_file:
+      - ./environment/.env.production
+    restart: "on-failure"
+  # ———————————————————— AUTHENTICATION ——————————————————————————————————————
+  joke_auth:
+    image: auth:latest
+    build:
+      context: ./
+      dockerfile: auth.Dockerfile
+    expose:
+      - "${AUTH_PORT}"
+    networks:
+      - sql
+      - web
+    env_file:
+      - ./environment/.env.production
+  # NGINX:
+  joke_webserver:
+    image: nginx:stable
+    volumes:
+      - "./static:/usr/share/nginx/html:ro"
+      - "./static/event_handlers:/usr/share/nginx/html/event_handlers:ro"
+      - "./RegEx:/usr/share/nginx/RegEx:ro"
+      - "./assets:/usr/share/nginx/assets:ro"
+      - "./nginx/templates:/etc/nginx/templates:ro"
+      - "./nginx/config/nginx.conf:/etc/nginx/nginx.conf:ro"
+    ports:
+      - "${HTTP_PORT}:${HTTP_PORT}"
+      - "${HTTPS_PORT}:${HTTPS_PORT}"
+    networks:
+      - web
+    env_file:
+      - ./environment/.env.production
+    restart: "on-failure"
+
+networks:
+  sql:
+  web:
+volumes:
+  db_data:
