@@ -89,8 +89,8 @@ REGISTER_BTN.addEventListener("click", function show_modal() {
  * @type{HTMLInputElement}
  */
 const USERNAME_INPUT = document.getElementById("username");
-/** @type {HTMLDialogElement} */
-const REGISTER_DIALOG = document.getElementById("registration-modal");
+/** @type {HTMLFormElement} */
+const REGISTER_FORM = document.getElementById("registration_form");
 
 const CLOSE_BTN = document.getElementById("close");
 CLOSE_BTN.addEventListener("click", function close_modal() {
@@ -98,8 +98,8 @@ CLOSE_BTN.addEventListener("click", function close_modal() {
 });
 
 // Start registration when the user clicks a button
-REGISTER_DIALOG.addEventListener(
+REGISTER_FORM.addEventListener(
   // Form submit event will not fire here!
-  "close",
+  "submit",
   get_registration_handler(USERNAME_INPUT, REGISTER_BTN, REGISTER_MSG),
 );
