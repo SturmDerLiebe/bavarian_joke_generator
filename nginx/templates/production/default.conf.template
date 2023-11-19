@@ -4,8 +4,8 @@ server {
     listen [::]:${HTTP_PORT};
     listen ${HTTPS_PORT} ssl http2;
     listen [::]:${HTTPS_PORT} ssl http2;
-    ssl_certificate '/etc/letsencrypt/live/bavarian-joke-generator.org/fullchain.pem';
-    ssl_certificate_key '/etc/letsencrypt/live/bavarian-joke-generator.org/privkey.pem';
+    ssl_certificate /etc/nginx/ssl/fullchain.pem;
+    ssl_certificate_key /etc/nginx/ssl/privkey.pem;
     add_header Content_Security-Policy "default-src 'self'; script-src 'sha384-7FvcOpf85HsGS89sLrvOOHZYqgaEqbfUi87HhpbqbndTSFw+XpzbDMK5ZcxD28fe'; frame-ancestors: 'self'; form-action 'self'; base-uri 'self';";
     add_header X-Content-Type-Options: "nosniff";
     root /usr/share/nginx/html;
