@@ -1,5 +1,5 @@
 server {
-    server_name bavarian-joke-generator.org www.bavarian-joke-generator.org;;
+    server_name bavarian-joke-generator.org www.bavarian-joke-generator.org;
     listen ${HTTP_PORT};
     listen [::]:${HTTP_PORT};
     listen ${HTTPS_PORT} ssl http2;

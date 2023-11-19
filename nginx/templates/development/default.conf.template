@@ -1,5 +1,5 @@
 server {
-    server_name bavarian-joke-generator.org;
+    #server_name bavarian-joke-generator.org;
     listen ${HTTP_PORT};
     listen [::]:${HTTP_PORT};
     #listen ${HTTPS_PORT} ssl http2;
@@ -50,12 +50,12 @@ server {
     }
 }
 
-server {
-    server_name administration.bavarian-joke-generator.org
-    listen ${HTTP_PORT};
-    listen [::]:${HTTP_PORT};
-
-    location / {
-        fastcgi_pass "http://${ADMINER_HOST}:${ADMINER_PORT}";
-    }
-}
+#server {
+#    server_name administration.bavarian-joke-generator.org
+#    listen ${HTTP_PORT};
+#    listen [::]:${HTTP_PORT};
+#
+#    location / {
+#        fastcgi_pass "http://${ADMINER_HOST}:${ADMINER_PORT}";
+#    }
+#}
