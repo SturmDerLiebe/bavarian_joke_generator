@@ -50,8 +50,8 @@ services:
       - "./static/event_handlers:/usr/share/nginx/html/event_handlers:ro"
       - "./RegEx:/usr/share/nginx/RegEx:ro"
       - "./assets:/usr/share/nginx/assets:ro"
-      - "./nginx/templates:/etc/nginx/templates:ro"
-      - "./nginx/config/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./nginx/templates/production:/etc/nginx/templates:ro"
+      - "./nginx/config/production/nginx.conf:/etc/nginx/nginx.conf:ro"
     ports:
       - "${HTTP_PORT}:${HTTP_PORT}"
       - "${HTTPS_PORT}:${HTTPS_PORT}"
