@@ -62,7 +62,7 @@ services:
       - "./nginx/templates/development:/etc/nginx/templates:ro"
       - "./nginx/config/development/nginx.conf:/etc/nginx/nginx.conf:ro"
     ports:
-      - "${HTTP_PORT}:${HTTP_PORT}"
+      - "80:80"
     networks:
       - web
     env_file:
