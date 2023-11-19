@@ -8,6 +8,7 @@ server {
     ssl_certificate_key /etc/nginx/ssl/privkey.pem;
     add_header Content_Security-Policy "default-src 'self'; script-src 'sha384-7FvcOpf85HsGS89sLrvOOHZYqgaEqbfUi87HhpbqbndTSFw+XpzbDMK5ZcxD28fe'; frame-ancestors: 'self'; form-action 'self'; base-uri 'self';";
     add_header X-Content-Type-Options: "nosniff";
+    add_header Strict-Transport-Security 'max-age=63072000; includeSubDomains; preload' always;
     root /usr/share/nginx/html;
     index index.html;
     error_page 400 /errors/400_wrong_input.html;
