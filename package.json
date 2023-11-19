@@ -16,7 +16,8 @@
     "jest": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=environment/.env.test jest --setupFiles=dotenv/config --detectOpenHandles --selectProjects",
     "format": "prettier . --write",
     "production-up": "docker compose -f docker-compose.production.yaml --env-file ./environment/.env.production up -d --build",
-    "production-down": "docker compose -f docker-compose.production.yaml --env-file ./environment/.env.production down"
+    "production-down": "docker compose -f docker-compose.production.yaml --env-file ./environment/.env.production down",
+    "production-logs": "docker compose -f docker-compose.production.yaml --env-file ./environment/.env.production logs"
   },
   "devDependencies": {
     "@playwright/test": "^1.39.0",
