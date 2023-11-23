@@ -53,9 +53,9 @@ services:
       - "./nginx/templates/production:/etc/nginx/templates:ro"
       - "./nginx/config/production/nginx.conf:/etc/nginx/nginx.conf:ro"
     ports:
+      - "127.0.0.1:8080:80"
     networks:
       - web
-      - "127.0.0.1:8080:80"
     env_file:
       - ./environment/.env.production
     restart: "on-failure"
