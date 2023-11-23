@@ -25,7 +25,7 @@ SELECT
     a.credential_backed_up AS 'credentialBackedUp',
     a.transports
 FROM authenticator AS a
-INNER JOIN users AS u ON a.id = u.id
+INNER JOIN users AS u ON a.user_id = u.id
 WHERE u.username = ?;
 `;
   try {
