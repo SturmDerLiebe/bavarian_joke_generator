@@ -3,7 +3,7 @@
 /**
  * German words and regular punctuation seperated by spaces.
  */
-const CONTENT_PATTERN = /^(?:[A-Za-zöüäÖÜÄ0-9\.,:;'ʼ";„“–—\-\?!]+\s?)+$/;
+const CONTENT_PATTERN = /^(?:[A-Za-zöüäÖÜÄß0-9\.,:;'ʼ";„“–—\-\?!]+\s?)+$/;
 
 /**
  * English words and regular punctuation seperated by spaces.
