@@ -13,9 +13,7 @@ Additionally users can also submit their own jokes given
 These are the most basic features and use cases this website is supposed to provide.
 In the future and further down in this document you will see some extra features like managing your submittet jokes after logging in. These are not **implemented yet**.
 
-The website can currently be accessed on [http://bavarian-joke-generator.org](http://bavarian-joke-generator.org) (*might change*)
-
-**The https connection does no work and therefore webauthn is broken on this live version**
+The website can currently be accessed on [https://bavarian-joke-generator.org](https://bavarian-joke-generator.org).
 ## B. Documentation
 - [Jump to local setup guide](#i-development-setup)
 ### a) Technologies used:
