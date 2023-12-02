@@ -50,11 +50,12 @@ SUBMIT_JOKE_FORM.addEventListener("submit", async function joke_handler(event) {
   if (SUBMITTED_BY_INPUT.value.length) {
     /* ————————————————— WebauthnLogin ————————————————————————————————————— */
     try {
-      // Make sure to always call this after constraint validation was done via reportValidity()
-      event.preventDefault(); // For some unkown reason the following fetch calls ignore a preventDefault that comes afterwards #1
+      // Make sure to always call this after constraint validation was done via reportValidity(), to enable custom form submission
+      event.preventDefault();
+      // For some unkown reason the following fetch calls ignore a preventDefault that comes afterwards (#1), which is why the extra is_finished flag is used:
       const is_finished = await handle_login(SUBMITTED_BY_INPUT.value, event);
       if (is_finished) {
-        SUBMIT_JOKE_FORM.submit(); // For some otherworldly reason, the submit does not wait on the error handling to finish. Investigate this (TODO), see #1
+        SUBMIT_JOKE_FORM.submit(); // For some otherworldly reason, the submit does not (a)wait on the error handling to finish. Investigate this (TODO), see #1
         return;
       }
     } catch (error) {
