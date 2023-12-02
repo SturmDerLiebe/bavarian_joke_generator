@@ -75,7 +75,7 @@ VALUES (
  * @returns {import("../../types/Database.js").Mysql2_Insertion_Return_Data[]}
  */
 function execute_query(connection, queries) {
-  return queries.map(function (query) {
+  return queries.map(function(query) {
     const PARAMS = query[1];
     return connection.execute(query[0], PARAMS || null);
   });
@@ -87,9 +87,10 @@ function execute_query(connection, queries) {
  * @returns {QP_Pair[]} queries - An array if queries that can be used for execution.
  */
 function repeat_keyword_INSERT(keywords) {
-  return keywords.flatMap(function (keyword) {
+  return keywords.flatMap(function(keyword) {
     return [
       [
+        // ON DUPLICATE will change the id! That's why LAST_INSERT_ID() should not be used!
         "INSERT INTO keyword (title) VALUES (?) ON DUPLICATE KEY UPDATE title=title;",
         [keyword],
       ],
