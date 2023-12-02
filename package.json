@@ -9,7 +9,7 @@
   "scripts": {
     "dev-ui": "vite serve static/",
     "docker-dev": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development up -V -d --build --remove--orphans",
-    "docker-test": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.test up -V --build",
+    "docker-test": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.test up -V -d --build --remove--orphans",
     "docker-down": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development down -v",
     "docker-kill": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development kill",
     "playwright": "NODE_ENV=test playwright test --project",
