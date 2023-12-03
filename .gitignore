@@ -1,5 +1,6 @@
 # Custom gitignore part:
 .env.production
+**/production
 
 # playwright
 /test-results/
