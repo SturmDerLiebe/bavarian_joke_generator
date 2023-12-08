@@ -21,11 +21,16 @@ CREATE USER IF NOT EXISTS authenticator IDENTIFIED BY 'authenticatorPW';
 GRANT SELECT, INSERT, UPDATE (current_challange) ON bavarian_jokes.users TO authenticator;
 GRANT SELECT, INSERT, UPDATE (counter) ON bavarian_jokes.authenticator TO authenticator;
 
--- LOGGED_IN_USER:
-CREATE USER IF NOT EXISTS logged_in_user IDENTIFIED BY 'logged_in_userPW';
+-- ADMIN
+CREATE USER IF NOT EXISTS administrator IDENTIFIED BY 'adminPW';
 
-GRANT DELETE,
-UPDATE (content, explanation) ON bavarian_jokes.joke TO logged_in_user;
+GRANT ALL ON bavarian_jokes.* TO administrator;
+
+-- -- LOGGED_IN_USER:
+-- CREATE USER IF NOT EXISTS logged_in_user IDENTIFIED BY 'logged_in_userPW';
+-- 
+-- GRANT DELETE,
+-- UPDATE (content, explanation) ON bavarian_jokes.joke TO logged_in_user;
 
 -- TESTER is not part of production:
 CREATE USER IF NOT EXISTS tester IDENTIFIED BY 'testerPW';
