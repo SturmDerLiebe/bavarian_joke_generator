@@ -1,6 +1,6 @@
 # Custom gitignore part:
 .env.production
-**/production
+database/mysql/production/*
 
 # playwright
 /test-results/
