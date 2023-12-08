@@ -9,6 +9,7 @@
   "scripts": {
     "dev-ui": "vite serve static/",
     "docker-dev": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development up -V -d --build --remove-orphans",
+    "docker-logs": "docker compose -f docker-compose.dev.yaml --env-file ./environment/.env.development logs",
     "docker-test": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.test up -V -d --build --remove-orphans",
     "docker-down": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development down -v",
     "docker-kill": "docker-compose -f docker-compose.dev.yaml --env-file ./environment/.env.development kill",
