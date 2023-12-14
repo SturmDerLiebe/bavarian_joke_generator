@@ -22,48 +22,7 @@ const SUBMITTED_BY_INPUT = document.getElementById("submitter");
 /** @type {HTMLSpanElement} */
 const ERROR_SPAN = document.getElementById("login_error");
 
-SUBMIT_JOKE_FORM.addEventListener("submit", async function joke_handler(event) {
-  // Check Validity of textareas:
-  if (!CONTENT_PATTERN.test(CONTENT_AREA.value)) {
-    CONTENT_AREA.setCustomValidity(
-      "For Content only use German letters and punctuation!",
-    );
-    SUBMIT_JOKE_FORM.reportValidity();
-    // Set Timeout so the empty custom validity does not interfere with current event
-    setTimeout(() => {
-      CONTENT_AREA.setCustomValidity("");
-    }, 5000); // -> new submits will stay invalid for 5 seconds!
-    return event.preventDefault();
-  }
-  if (!EXPLANATION_PATTERN.test(EXPLANATION_AREA.value)) {
-    EXPLANATION_AREA.setCustomValidity(
-      "For Explanation only use English letters and punctuation!",
-    );
-    SUBMIT_JOKE_FORM.reportValidity();
-    // Set Timeout so the empty custom validity does not interfere with current event
-    setTimeout(() => {
-      EXPLANATION_AREA.setCustomValidity("");
-    }, 5000);
-    return event.preventDefault();
-  }
-
-  if (SUBMITTED_BY_INPUT.value.length) {
-    /* ————————————————— WebauthnLogin ————————————————————————————————————— */
-    try {
-      // Make sure to always call this after constraint validation was done via reportValidity(), to enable custom form submission
-      event.preventDefault();
-      // For some unkown reason the following fetch calls ignore a preventDefault that comes afterwards (#1), which is why the extra is_finished flag is used:
-      const is_finished = await handle_login(SUBMITTED_BY_INPUT.value, event);
-      if (is_finished) {
-        SUBMIT_JOKE_FORM.submit(); // For some otherworldly reason, the submit does not (a)wait on the error handling to finish. Investigate this (TODO), see #1
-        return;
-      }
-    } catch (error) {
-      ERROR_SPAN.innerText = error.message;
-      ERROR_SPAN.hidden = false;
-    }
-  }
-});
+SUBMIT_JOKE_FORM.addEventListener("submit", submit_joke_handler);
 
 /* ================== Registration Elements ================================ */
 
@@ -104,3 +63,71 @@ REGISTER_FORM.addEventListener(
   "submit",
   get_registration_handler(USERNAME_INPUT, REGISTER_BTN, REGISTER_MSG),
 );
+
+/* -------------------- Event Handlers ---------------------------------- */
+async function submit_joke_handler(event) {
+  try {
+    // Check and report Validity of both textareas:
+    if (
+      !(
+        handle_validity_check(
+          CONTENT_AREA,
+          CONTENT_PATTERN,
+          SUBMIT_JOKE_FORM,
+          "For Content only use German letters and punctuation!",
+        ) &&
+        handle_validity_check(
+          EXPLANATION_AREA,
+          EXPLANATION_PATTERN,
+          SUBMIT_JOKE_FORM,
+          "For Explanation only use English letters and punctuation!",
+        )
+      )
+    ) {
+      // End the function if inputs are invalid and cancel submit event
+      return event.preventDefault();
+    }
+    // Only try yo authenticate when submission is not anonymous
+    /* ————————————————— WebauthnLogin ————————————————————————————————————— */
+    if (SUBMITTED_BY_INPUT.value.length) {
+      event.preventDefault(); // Make sure to always call this after constraint validation succeeded via reportValidity(), to enable custom form submission
+      const is_finished = await handle_login(SUBMITTED_BY_INPUT.value, event);
+      // For some unkown reason the following fetch calls during handle_login seem to ignore a preventDefault that comes afterwards (#1), which is why the extra is_finished flag is used
+      if (is_finished) {
+        SUBMIT_JOKE_FORM.submit(); // For some otherworldly reason, the submit does not (a)wait on the error handling to finish. Investigate this (TODO), see #1
+        return;
+      }
+    }
+    // else just continuee with valid anonymous submission
+  } catch (error) {
+    ERROR_SPAN.innerText = error.message;
+    ERROR_SPAN.hidden = false;
+  } finally {
+    /* ------------------------ Cleanup ----------------------------------- */
+    // Use Timeout so Message does not get deleted before User can read it
+    setTimeout(() => {
+      CONTENT_AREA.setCustomValidity("");
+      EXPLANATION_AREA.setCustomValidity("");
+      return;
+    }, 5000);
+  }
+}
+
+/** Handles checking and reporting the validity of textareas, since they do not get checked by HTML like Input Elements.
+ * @param textarea_to_check {HTMLTextAreaElement}
+ * @param valid_pattern {RegExp}
+ * @param form_to_be_submitted {HTMLFormElement}
+ * @param custom_validity_message {string}
+ * @returns {boolean} the status of the validity
+ */
+function handle_validity_check(
+  textarea_to_check,
+  valid_pattern,
+  form_to_be_submitted,
+  custom_validity_message,
+) {
+  if (!valid_pattern.test(textarea_to_check.value)) {
+    textarea_to_check.setCustomValidity(custom_validity_message);
+  }
+  return form_to_be_submitted.reportValidity();
+}
