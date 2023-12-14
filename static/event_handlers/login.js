@@ -30,7 +30,12 @@ async function handle_login(username) {
       body: JSON.stringify(asses_resp),
     });
 
-    if (!verificationResp.ok) {
+    if (verificationResp.status === 404) {
+      throw new Error(
+        "The user you are trying to submit as, does not exist yet!",
+      );
+    }
+    else if (!verificationResp.ok) {
       throw new Error("There was an issue logging you in. Please try again!");
     }
 
