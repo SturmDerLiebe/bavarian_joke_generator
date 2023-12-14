@@ -15,6 +15,14 @@ services:
     command:
       - --host-cache-size=3
     restart: "on-failure"
+  # ———————————————————— ADMINER —————————————————————————————————————————————
+  adminer:
+    image: adminer:latest
+    restart: "on-failure"
+    networks:
+      - sql
+    ports:
+      - "127.0.0.1:9090:8080"
   # ———————————————————— SSR ——————————————————————————————————————
   joke_ssr:
     image: ssr:latest

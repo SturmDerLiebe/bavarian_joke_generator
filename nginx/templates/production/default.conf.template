@@ -1,4 +1,5 @@
 server {
+    server_name bavarian-joke-generator.org www.bavarian-joke-generator.org;
     listen 80;
     listen [::]:80;
     error_page 400 /errors/400_wrong_input.html;
@@ -48,5 +49,4 @@ server {
         default_type text/javascript;
         root /usr/share/nginx/html;
     }
-}
 }
