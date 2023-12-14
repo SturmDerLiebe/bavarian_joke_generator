@@ -30,7 +30,7 @@ services:
       # expose:
       #   - 8080
     ports:
-      - "8080:8080"
+      - "9090:8080"
   # SERVER SIDE RENDERING:
   joke_ssr:
     image: ssr:latest
