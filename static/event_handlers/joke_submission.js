@@ -7,9 +7,11 @@ import { handle_login } from "./login.js";
   * @param submit_form {HTMLFormElement}
   * @param content_field {HTMLTextAreaElement}
   * @param explanation_field {HTMLTextAreaElement}
+  * @param submitted_by_input {HTMLInputElement}
+  * @param error_msg {HTMLParagraphElement}
   * @returns {(event: SubmitEvent) => void} Submit handler function with scoped element arguments
   */
-function get_submit_joke_handler(submit_form, content_field, explanation_field) {
+function get_submit_joke_handler(submit_form, content_field, explanation_field, submitted_by_input, error_msg) {
   return (
     async function submit_joke_handler(event) {
       try {
@@ -35,22 +37,23 @@ function get_submit_joke_handler(submit_form, content_field, explanation_field) 
         }
         // Only try yo authenticate when submission is not anonymous
         /* ————————————————— WebauthnLogin ————————————————————————————————————— */
-        if (SUBMITTED_BY_INPUT.value.length) {
+        if (submitted_by_input.value.length) {
           event.preventDefault(); // Make sure to always call this after constraint validation succeeded via reportValidity(), to enable custom form submission
-          await handle_login(SUBMITTED_BY_INPUT.value, event);
+          await handle_login(submitted_by_input.value, event);
           submit_form.submit();
           return;
         }
-        // else just continuee with valid anonymous submission
+        // else just continue with valid anonymous submission
       } catch (error) {
-        ERROR_SPAN.innerText = error.message;
-        ERROR_SPAN.hidden = false;
+        error_msg.textContent = error.message;
+        error_msg.toggleAttribute("hidden");
       } finally {
         /* ------------------------ Cleanup ----------------------------------- */
         // Use Timeout so Message does not get deleted before User can read it
         setTimeout(() => {
           content_field.setCustomValidity("");
           explanation_field.setCustomValidity("");
+          error_msg.hidden = "hidden"; // hide error again
           return;
         }, 5000);
       }

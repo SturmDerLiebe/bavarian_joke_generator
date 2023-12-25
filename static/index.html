@@ -126,10 +126,10 @@
                 autocomplete="username webauthn"
               />
             </label>
-            <span id="login_error" hidden role="alert"
+            <p id="login_error" hidden role="alert"
               >There has been an isse logging in. Please try submitting your
               joke with your correct username again or submit it
-              anonymously</span
+              anonymously</p
             >
             <button id="submit_joke" type="submit">Submit Joke</button>
           </form>
@@ -169,10 +169,11 @@
       <hr />
       <section class="signup-section">
         <h2>Create your own profile</h2>
-        <p id="register-message" role="alert">
+        <p id="register_cta" role="status" >
           If you want to have your username shown next to your submitted joke,
         </p>
-        <p><strong>register your new profile here</strong>:</p>
+        <p id="register_message"><strong>register your new profile here</strong>:</p>
+        <p id="signup_error" hidden role="alert" >We are sorry, but something went wrong!</p>
         <button id="start-register">Start Registration</button>
         <dialog id="registration-modal">
           <form
