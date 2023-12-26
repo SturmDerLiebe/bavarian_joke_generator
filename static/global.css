@@ -167,7 +167,7 @@ hr {
   box-shadow: 0 0 0.1em;
 }
 
-:not(section, article, figure) ~ hr {
+.small-divider {
   margin-block: 0.5em;
   margin-inline: 2em;
   border-color: floralwhite;
