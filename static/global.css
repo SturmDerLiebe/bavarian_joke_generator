@@ -96,12 +96,13 @@ body::before {
   z-index: -1;
   position: fixed;
   rotate: -45deg;
+  /* Large view dimensions are used to prevent jittering on mobile browsers */
   /* Move the rotated image back to the upper left corner: */
-  top: -100%;
-  left: -100%;
+  top: -100lvh;
+  left: -100lvw;
   /* Stretch the image to cover the whole page */
-  width: 300%;
-  height: 300%;
+  width: 300lvw;
+  height: 300lvh;
   /* Set background color to cover browser induced gaps between repeats */
   background-color: rgb(9, 142, 202);
 }
