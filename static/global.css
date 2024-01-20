@@ -79,7 +79,6 @@ textarea {
 
 /*————————————————————————————— Global CSS: ————————————————————————————————*/
 :root {
-  --scale-factor: 3;
   --base-font-size: 16px;
   --header-bg: rgb(240, 255, 255, 0.9);
   --main-bg: rgb(240, 255, 255, 0.7);
