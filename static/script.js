@@ -19,7 +19,16 @@ const SUBMITTED_BY_INPUT = document.getElementById("submitter");
 /** @type {HTMLParagraphElement} */
 const SUBMISSION_ERROR = document.getElementById("login_error");
 
-SUBMIT_JOKE_FORM.addEventListener("submit", get_submit_joke_handler(SUBMIT_JOKE_FORM, CONTENT_AREA, EXPLANATION_AREA, SUBMITTED_BY_INPUT, SUBMISSION_ERROR));
+SUBMIT_JOKE_FORM.addEventListener(
+  "submit",
+  get_submit_joke_handler(
+    SUBMIT_JOKE_FORM,
+    CONTENT_AREA,
+    EXPLANATION_AREA,
+    SUBMITTED_BY_INPUT,
+    SUBMISSION_ERROR,
+  ),
+);
 
 /* ================== Registration Elements ================================ */
 
@@ -67,5 +76,11 @@ CLOSE_BTN.addEventListener("click", function close_modal() {
 REGISTER_FORM.addEventListener(
   // Form submit event will not fire here!
   "submit",
-  get_registration_handler(USERNAME_INPUT, REGISTER_BTN, REGISTER_CTA, REGISTER_MSG, SIGNUP_ERROR),
+  get_registration_handler(
+    USERNAME_INPUT,
+    REGISTER_BTN,
+    REGISTER_CTA,
+    REGISTER_MSG,
+    SIGNUP_ERROR,
+  ),
 );

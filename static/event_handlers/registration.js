@@ -9,7 +9,13 @@ const { startRegistration } = SimpleWebAuthnBrowser;
  * @param {HTMLParagraphElement} register_msg
  * @param {HTMLParagraphElement} error_msg
  */
-function get_registration_handler(username_input, register_btn, register_cta, register_msg, error_msg) {
+function get_registration_handler(
+  username_input,
+  register_btn,
+  register_cta,
+  register_msg,
+  error_msg,
+) {
   return async () => {
     let response;
     let attResp;
@@ -42,8 +48,10 @@ function get_registration_handler(username_input, register_btn, register_cta, re
 
       // Show UI appropriate for the `verified` status
       if (verificationResp.ok) {
-        register_cta.textContent = "How about you try submitting a joke with your name?";
-        register_msg.innerHTML = "<b>You successfully created your profile!</b>";
+        register_cta.textContent =
+          "How about you try submitting a joke with your name?";
+        register_msg.innerHTML =
+          "<b>You successfully created your profile!</b>";
         register_btn.remove();
       } else {
         error_msg.toggleAttribute("hidden"); // show default error
@@ -55,8 +63,7 @@ function get_registration_handler(username_input, register_btn, register_cta, re
       // TODO: Delete username from db
       register_btn.textContent = "Try again";
       register_btn.focus();
-    }
-    finally {
+    } finally {
       // hide error after 5 seconds for clean retry
       setTimeout(() => {
         error_msg.hidden = "hidden"; // hide error again

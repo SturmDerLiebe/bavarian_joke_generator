@@ -16,8 +16,7 @@ async function handle_login(username) {
       throw new Error(
         "The user you are trying to submit as, does not exist yet!",
       );
-    }
-    else if (!resp.ok) {
+    } else if (!resp.ok) {
       throw new Error(
         "There was an issue starting the submission process. Please try again!",
       );
